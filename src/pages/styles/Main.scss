@@ -1,0 +1,12 @@
+.Main {
+  &__section {
+    &--first {
+      z-index: 10;
+      overflow: hidden;
+    }
+    &--second {
+      z-index: 1;
+    }
+    color: white;
+  }
+}

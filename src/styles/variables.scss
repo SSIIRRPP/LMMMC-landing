@@ -1,0 +1,49 @@
+$main-grey: #585858;
+$main-grey-active: #3f3f3f;
+$medium-grey: #d3d2d2fd;
+$light-grey: #e7e7e7;
+$light-grey-active: #c0c0c0;
+$main-orange: #ff4d20;
+$main-orange-hover: #ca3d1a;
+$main-yellow: #f3b200;
+$main-background-color: rgb(33, 37, 41);
+$text-black-background: rgba(0, 0, 0, 0.61);
+$main-font-family: "Roboto";
+$main-radius: 0.4rem;
+$dark-background-primary: /* rgb(100, 100, 100) */ rgb(76, 76, 76);
+$dark-background-secondary: rgb(66, 66, 66);
+$dark-box-shadow-primary: 1px 1px 2px #e7e7e7;
+$dark-color-primary: #e7e7e7;
+$dark-color-secondary: #585858;
+$dark-button-color-primary: #e7e7e7;
+$dark-border-color-primary: #e7e7e7;
+$dark-border-color-secondary: #585858;
+$light-background-primary: white;
+$light-background-secondary: rgb(192, 192, 192);
+$light-box-shadow-primary: 1px 1px 2px #d3d2d2fd;
+$light-color-primary: #313131;
+$light-color-secondary: white;
+$light-button-color-primary: rgb(0, 123, 255);
+$light-border-color-primary: #d3d2d2fd;
+$light-border-color-secondary: #585858;
+$whatsapp-green: #0c9e17;
+$whatsapp-green-hover: #0a7213;
+$main-button-background-color: rgb(10, 10, 10);
+$main-button-background-color-hover: rgb(0, 0, 0);
+$main-button-color: #f3b200;
+
+@mixin lmmmc-button {
+  background-color: $main-button-background-color;
+  border-color: $main-button-background-color;
+  color: $main-button-color;
+  transition: transform 0.5s;
+  &:hover {
+    transform: scale(1.02);
+    background-color: $main-button-background-color-hover;
+    border-color: $main-button-background-color-hover;
+  }
+  &:focus {
+    background-color: $main-button-background-color-hover;
+    border-color: $main-button-background-color-hover;
+  }
+}

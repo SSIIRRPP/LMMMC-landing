@@ -1,0 +1,71 @@
+@import "../../../../styles/variables.scss";
+
+$light-back: rgba(0, 0, 0, 0.377);
+
+.CarouselSlide {
+  padding: 1rem;
+  margin: 1rem;
+  display: grid;
+  grid-auto-rows: auto 1fr auto;
+  grid-auto-columns: 100%;
+  background-color: rgba(0, 0, 0, 0.11);
+  border-radius: 1rem;
+  &__title {
+    /* padding: 0 1rem; */
+    font-size: 2.2rem;
+    display: inline;
+    line-height: normal;
+    text-align: center;
+    &--container {
+      background-color: $light-back;
+      border-radius: 1rem;
+      padding: 1rem;
+    }
+  }
+  &__body {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &--text {
+      padding: 0.1rem;
+      width: 90%;
+      font-size: 1.25rem;
+      border-radius: 0.6rem;
+      background-color: $light-back;
+    }
+  }
+  &__button {
+    @include lmmmc-button;
+    margin: 0 auto;
+    min-height: 65px;
+    max-width: 80%;
+    width: 100%;
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .CarouselSlide {
+    &__title {
+      font-size: 1.5rem;
+      word-wrap: break-word;
+    }
+    &__body {
+      &--text {
+        font-size: 1rem;
+      }
+    }
+    &__button {
+      max-width: none;
+    }
+  }
+}
+
+@media screen and (max-width: 940px) {
+  .CarouselSlide {
+    &__title {
+      font-size: 1.75rem;
+    }
+  }
+}

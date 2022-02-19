@@ -1,0 +1,15 @@
+.Footer {
+  padding: 2rem;
+  min-height: 90px;
+  background-color: black;
+  &__text {
+    color: white;
+  }
+  &__link {
+    color: white;
+    cursor: pointer;
+    &:hover {
+      color: gray;
+    }
+  }
+}

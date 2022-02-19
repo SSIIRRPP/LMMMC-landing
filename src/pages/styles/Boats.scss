@@ -1,0 +1,75 @@
+@import "../../styles/variables.scss";
+
+.Boats {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  &__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &--container {
+      max-width: 80%;
+      padding: 1rem;
+      height: auto;
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      background-color: rgba(255, 255, 255, 0.651);
+      border-radius: $main-radius;
+      & > h1 {
+        margin: 1rem 0;
+        text-align: center;
+        color: $light-color-primary;
+      }
+    }
+    &--text {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      & > h5 {
+        margin: 1rem 0;
+        text-align: center;
+        color: $light-color-primary;
+      }
+    }
+  }
+  &__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    /* margin-bottom: 2rem; */ // consultar a gary
+    &--item {
+      overflow: hidden;
+      width: 100%;
+      /* margin: 2rem 1rem 0; */ // consultar a gary
+      /* max-width: 1200px; */ // consultar a gary
+    }
+    &--header {
+      /* 
+      height: 50px;
+      background-color: white;
+      position: sticky;
+      top: 80px; */
+    }
+  }
+}
+
+.light {
+  & .Boats {
+    &__body {
+      &--item {
+        border-color: $light-grey;
+      }
+    }
+  }
+}
+.dark {
+  & .Boats {
+    &__body {
+      &--item {
+        border-color: $main-grey;
+      }
+    }
+  }
+}

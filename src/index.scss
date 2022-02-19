@@ -1,0 +1,40 @@
+@import "./styles/variables.scss";
+
+* {
+  margin: 0%;
+  padding: 0%;
+  border: 0;
+}
+
+body {
+  &.dark {
+    background: rgb(101, 101, 101);
+    background: linear-gradient(
+      180deg,
+      rgba(101, 101, 101, 1) 0%,
+      rgba(61, 61, 61, 1) 100%
+    );
+  }
+  &.light {
+    background: rgb(224, 224, 224);
+    background: linear-gradient(
+      180deg,
+      rgba(224, 224, 224, 1) 0%,
+      rgba(189, 189, 189, 1) 100%
+    );
+  }
+  min-height: 100vh;
+  font-family: "Roboto", sans-serif;
+  color: rgb(33, 37, 41);
+  /*  overflow-y: scroll; */
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+  cursor: inherit;
+}
+
+#root {
+  min-height: 100vh;
+}
