@@ -62,7 +62,7 @@ const Theme = (props) => {
     }),
     [lightTheme, darkTheme]
   );
-  const [theme, setThemeBase] = useState({ ...init, ...lightTheme });
+  const [theme, setThemeBase] = useState({ ...init, ...darkTheme });
 
   const setTheme = useCallback(
     (s) => {
