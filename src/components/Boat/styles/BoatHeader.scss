@@ -1,0 +1,190 @@
+@import "../../../styles/variables.scss";
+
+.BoatHeader {
+  &__Body {
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    &--first {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    &--second {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+    &Badge {
+      @include box-shadow-two;
+      & * {
+        margin: 0;
+        color: $dark-color-primary;
+      }
+      & button {
+        @include underline-on-hover;
+        @include underline-on-hover-color(white);
+      }
+      margin: 1rem 1rem 0 0;
+      padding: 0 1rem;
+      background-color: $text-black-background;
+      border-radius: $main-radius;
+      animation-name: fade-in-top-badge;
+      animation-duration: 0.5s;
+      animation-delay: 0.5s;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
+      transform: translateX(80%);
+      opacity: 0;
+      box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.13);
+      &--top {
+        & > h5 {
+          text-align: center;
+          margin: 0 1rem;
+        }
+        margin: 0.25rem 0;
+      }
+      &--bottom {
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-end;
+      }
+      &--separator {
+        display: flex;
+        height: 1px;
+        max-height: 1px;
+        width: 100%;
+        background-color: $dark-color-primary;
+        padding: 0 1rem;
+      }
+      &--item {
+        margin: 0.25rem 0;
+      }
+      &--capacity {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        & > h6 {
+          margin-bottom: 0;
+        }
+        & > span {
+          margin-left: 0.5rem;
+          & > svg {
+            fill: $dark-color-primary;
+          }
+        }
+      }
+      &--shipmaster {
+        & > h6 {
+          text-decoration: underline;
+          text-underline-offset: 2px;
+        }
+      }
+      &--license {
+      }
+    }
+    &Card {
+      @include box-shadow-two;
+      & button {
+        @include underline-on-hover;
+        @include underline-on-hover-color(#1976d2);
+      }
+      animation-name: fade-in-top-card;
+      animation-duration: 0.8s;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
+      animation-delay: 0.5s;
+      transform: translateX(-80%);
+      opacity: 0;
+      box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.13);
+      background-color: rgba(255, 255, 255, 0.89);
+      &--container {
+        margin: 1rem;
+      }
+      &--content {
+        border-top: 1px solid;
+        border-bottom: 1px solid;
+        border-color: $light-border-color-primary;
+        & > h6,
+        h3 {
+        }
+      }
+    }
+  }
+  &__Bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    &--top {
+      & > h1 {
+        width: auto;
+        text-align: center;
+        margin-bottom: 0;
+        color: white;
+        background-color: $dark-background-secondary;
+        display: inline-block;
+        padding: 0.25rem 1rem 0;
+        border-top-right-radius: $main-radius;
+        border-top-left-radius: $main-radius;
+      }
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    &--middle {
+      height: 10px;
+      background-color: $dark-background-secondary;
+    }
+    &--bottom {
+      height: 20px;
+      background-color: $dark-background-secondary;
+    }
+  }
+}
+
+@media screen and (max-width: 810px) {
+  .BoatHeader {
+    &__Body {
+      &--first {
+        flex-direction: column;
+      }
+      &--second {
+        justify-content: center;
+      }
+      &Badge {
+        margin-left: auto;
+        margin-right: auto;
+        &--bottom {
+          align-items: center;
+        }
+      }
+      &Card {
+        margin-top: 4rem;
+      }
+    }
+  }
+}
+
+@keyframes fade-in-top-badge {
+  0% {
+    transform: translateX(80%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-top-card {
+  0% {
+    transform: translateX(-80%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,17 @@
+.CapacityIcon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: fit-content;
+  margin: 0 auto;
+  & > h6 {
+    margin-bottom: 0;
+    font-weight: 400;
+  }
+  & > span {
+    margin-left: 0.3rem;
+  }
+  & > p {
+    margin: 0 0.3rem 0 0;
+  }
+}

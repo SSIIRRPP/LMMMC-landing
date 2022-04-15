@@ -1,0 +1,30 @@
+@import "../../../styles/variables.scss";
+
+.CourseFooter {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__card {
+    @include box-shadow;
+    padding: 3rem;
+    background-color: $text-black-background;
+    border-radius: $main-radius;
+  }
+  &__top {
+    & h2 {
+      color: white;
+    }
+  }
+  &__bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__button {
+    @include lmmmc-button;
+    margin: 0.5rem auto 0;
+    font-size: 1.35rem;
+  }
+}

@@ -1,0 +1,108 @@
+@import "../../../styles/variables.scss";
+
+.BoatBody {
+  & ul {
+    & > li {
+      & > p {
+        & > span {
+        }
+        margin: 0;
+      }
+      text-align: center;
+      padding: 0.25rem 0.5rem;
+    }
+    list-style: none;
+    padding: 1rem;
+  }
+  &__wrapper {
+  }
+  &__specs {
+    grid-area: specs;
+    &--container {
+      @include box-shadow;
+    }
+    & ul {
+      margin: 1rem 0 0;
+    }
+    &--cols {
+      &1 {
+        columns: 1;
+      }
+      &2 {
+        columns: 2;
+      }
+      &3 {
+        columns: 3;
+      }
+    }
+  }
+  &__description {
+    grid-area: description;
+    & > p {
+      font-size: 0.9rem;
+    }
+    margin: 1rem 2rem 1rem 0;
+    padding: 0.8rem 1.2rem 0.8rem 0.8rem;
+  }
+  &__info {
+    @include box-shadow;
+    grid-area: info;
+    border: 1px solid;
+    border-radius: $main-radius;
+    margin: 2rem;
+    &--separator {
+      height: 1px;
+      width: 100%;
+    }
+    &--equipment {
+      /* display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start; */
+      & > ul {
+        width: 100%;
+        margin: 0;
+        & > li {
+          padding: 0.65rem 1rem;
+          font-size: 0.9rem;
+        }
+      }
+      &Header {
+        width: 100%;
+        padding: 0.5rem;
+        margin-top: 0.75rem;
+        & > h6 {
+          text-align: center;
+          margin: 0;
+          text-decoration: underline;
+          text-underline-offset: 3px;
+          text-decoration-thickness: 5%;
+        }
+      }
+    }
+    &--includes {
+      margin: 0;
+    }
+  }
+  &__prices {
+    grid-area: prices;
+  }
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: auto auto auto;
+  grid-template-areas: "specs specs" "prices info" "prices info";
+}
+
+@media screen and (max-width: 992px) {
+  .BoatBody {
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas: "specs" "info" "prices";
+    &__description {
+      margin: 1rem 0.5rem;
+    }
+    &__info {
+      margin: 0 0 1rem;
+    }
+  }
+}

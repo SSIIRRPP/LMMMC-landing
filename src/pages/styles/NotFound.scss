@@ -1,0 +1,53 @@
+@import "../../styles/variables.scss";
+
+.NotFound {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  & main {
+    display: grid;
+    grid-template-rows: auto auto auto;
+    grid-template-columns: 1fr;
+    & h1 {
+      padding: 0.5rem;
+      font-size: 3rem;
+      text-align: center;
+    }
+    & p {
+      padding: 0.5rem;
+      font-size: 1.15rem;
+      text-align: center;
+    }
+    & button {
+      @include lmmmc-button;
+      min-width: 300px;
+      margin: 0 auto;
+      padding: 1rem;
+      text-align: center;
+    }
+  }
+  & aside {
+    padding: 0 0.5rem;
+    & > img {
+      width: 100%;
+      min-width: 300px;
+      max-width: 600px;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .NotFound {
+    flex-direction: column;
+    justify-content: center;
+    & main {
+      margin-top: 4rem;
+    }
+    & aside {
+      & > img {
+        min-width: 300px;
+        max-width: 500px;
+      }
+    }
+  }
+}

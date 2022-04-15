@@ -1,0 +1,17 @@
+@import "./variables.scss";
+
+.light {
+  & .underline-on-hover {
+    &:after {
+      background-color: $second-yellow;
+    }
+  }
+}
+
+.dark {
+  & .underline-on-hover {
+    &:after {
+      background-color: $main-yellow;
+    }
+  }
+}

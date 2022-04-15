@@ -1,6 +1,6 @@
 import { Suspense, useCallback, useContext } from "react";
 import { Spinner } from "react-bootstrap";
-import { LayoutContext } from "../components/Layout";
+import LayoutContext from "../contexts/LayoutContext";
 
 const LazyLoader = ({ children }) => {
   const {

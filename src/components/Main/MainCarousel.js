@@ -9,7 +9,7 @@ import {
 import { Button, Carousel } from "react-bootstrap";
 import { Parallax, useParallaxController } from "react-scroll-parallax";
 import FirstBackground from "../../assets/images/veleroCharterMangaMarMenor.jpg";
-import SecondBackground from "../../assets/images/puertoTomasMaestre.jpg";
+import SecondBackground from "../../assets/images/chart.jpeg";
 import ThirdBackground from "../../assets/images/sailboatMain.jpg";
 import { ReactComponent as ForwardIcon } from "../../assets/icons/arrow_forward.svg";
 import { ReactComponent as BackIcon } from "../../assets/icons/arrow_back.svg";
@@ -22,7 +22,8 @@ import ThemeContext from "../../contexts/ThemeContext";
 import "./styles/MainCarousel.scss";
 import "./Slides/styles/CarouselSlide.scss";
 import LanguageContext from "../../contexts/LanguageContext";
-import { LayoutContext } from "../Layout";
+import LayoutContext from "../../contexts/LayoutContext";
+import FadeInComp from "../Visual/FadeInComp";
 
 const speed = 20;
 const scaleEase = [0.48, 0.98, 0, 1];
@@ -114,7 +115,6 @@ const MainCarousel = () => {
       <AdjustableContainer widthSwitch={widthSwitch} includeWidthContainer>
         {({ result: { height, collapsed, hover } }) => (
           <>
-            {console.log({ height, collapsed, hover })}
             <Carousel
               /* fade */
               activeIndex={collapsed ? key : undefined}
@@ -183,7 +183,9 @@ const MainCarousel = () => {
                         show ? "Show" : "Hide"
                       }`}
                     >
-                      <RentingSlide />
+                      <FadeInComp>
+                        <RentingSlide />
+                      </FadeInComp>
                     </div>
                   </Parallax>
                 </Carousel.Caption>
@@ -209,7 +211,9 @@ const MainCarousel = () => {
                         show ? "Show" : "Hide"
                       }`}
                     >
-                      <SchoolSlide />
+                      <FadeInComp>
+                        <SchoolSlide />
+                      </FadeInComp>
                     </div>
                   </Parallax>
                 </Carousel.Caption>
@@ -235,7 +239,9 @@ const MainCarousel = () => {
                         show ? "Show" : "Hide"
                       }`}
                     >
-                      <ContactSlide />
+                      <FadeInComp>
+                        <ContactSlide />
+                      </FadeInComp>
                     </div>
                   </Parallax>
                 </Carousel.Caption>

@@ -3,6 +3,7 @@
 $light-back: rgba(0, 0, 0, 0.377);
 
 .CarouselSlide {
+  @include box-shadow;
   padding: 1rem;
   margin: 1rem;
   display: grid;
@@ -17,6 +18,7 @@ $light-back: rgba(0, 0, 0, 0.377);
     line-height: normal;
     text-align: center;
     &--container {
+      @include box-shadow;
       background-color: $light-back;
       border-radius: 1rem;
       padding: 1rem;
@@ -28,6 +30,7 @@ $light-back: rgba(0, 0, 0, 0.377);
     justify-content: center;
     align-items: center;
     &--text {
+      @include box-shadow;
       padding: 0.1rem;
       width: 90%;
       font-size: 1.25rem;

@@ -7,16 +7,19 @@ const Theme = (props) => {
     () => ({
       name: "light",
       background: "white",
+      backgroundTranslucid: "rgba(255,255,255,0.85)",
       backgroundSecondary: "rgb(240,240,240)",
+      backgroundSecondaryTranslucid: "rgb(240,240,240, 0.85)",
       boxShadowPrimary: "1px 1px 2px #d3d2d2fd",
       boxShadowPrimaryInset: "1px 1px 2px inset #d3d2d2fd",
       extraBackground: "#d3d2d2fd",
       color: "rgb(76, 76, 76)",
-      colorSecondary: "white",
+      colorSecondary: "#8d8d8d",
       buttonColorPrimary: "rgb(0, 123, 255)",
       borderColorPrimary: "#d3d2d2fd",
-      borderColorSecondary: "rgb(0, 123, 255)",
-      mainYellow: "#f3b200",
+      borderColorSecondary: "rgb(151, 151, 151)",
+      borderColorTerciary: "#d3d2d2fd",
+      mainYellow: "#eff300",
     }),
     []
   );
@@ -25,16 +28,19 @@ const Theme = (props) => {
     () => ({
       name: "dark",
       background: "rgb(76, 76, 76)",
+      backgroundTranslucid: "rgba(76, 76, 76,0.85)",
       backgroundSecondary: "rgb(66, 66, 66)",
+      backgroundSecondaryTranslucid: "rgb(66, 66, 66, 0.85)",
       extraBackground: "rgb(66, 66, 66)",
       boxShadowPrimary: "1px 1px 2px #e7e7e7",
       boxShadowPrimaryInset: "1px 1px 2px inset #e7e7e7",
       color: "#e7e7e7",
-      colorSecondary: "rgb(66, 66, 66)",
+      colorSecondary: "rgb(145 145 145)",
       buttonColorPrimary: "#e7e7e7",
       borderColorPrimary: "#e7e7e7",
-      borderColorSecondary: "rgb(66, 66, 66)",
-      mainYellow: "#f3b200",
+      borderColorSecondary: "rgb(117, 116, 116)",
+      borderColorTerciary: "rgb(117, 116, 116)",
+      mainYellow: "#eff300",
       mainGrey: "#585858",
       mediumGrey: "#d3d2d2fd",
       lightGrey: "#e7e7e7",
@@ -47,10 +53,11 @@ const Theme = (props) => {
         dark: darkTheme,
         light: lightTheme,
       },
-      mainYellow: "#f3b200",
+      mainYellow: "#eff300",
       mainGrey: "#585858",
       mainOrange: "#ff4d20",
       mediumGrey: "#d3d2d2fd",
+      mainBoxShadow: "1px 1px 2px 1px rgba(0, 0, 0, 0.13)",
       lightGrey: "#e7e7e7",
     }),
     [lightTheme, darkTheme]
@@ -67,7 +74,7 @@ const Theme = (props) => {
     [init]
   );
 
-  const changeTheme = () => {
+  const changeTheme = useCallback(() => {
     const body = document.getElementsByTagName("body")[0];
     if (theme.name === "light") {
       setTheme(darkTheme);
@@ -79,7 +86,7 @@ const Theme = (props) => {
       localStorage.setItem("selectedTheme", "light");
       !body.classList.replace("dark", "light") && body.classList.add("light");
     }
-  };
+  }, [theme, setTheme, lightTheme, darkTheme]);
 
   useEffect(() => {
     let selectedTheme = localStorage.getItem("selectedTheme");

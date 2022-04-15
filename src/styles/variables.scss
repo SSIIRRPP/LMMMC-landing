@@ -2,16 +2,23 @@ $main-grey: #585858;
 $main-grey-active: #3f3f3f;
 $medium-grey: #d3d2d2fd;
 $light-grey: #e7e7e7;
+$light-grey-translucid: rgb(231, 231, 231, 0.9);
 $light-grey-active: #c0c0c0;
 $main-orange: #ff4d20;
 $main-orange-hover: #ca3d1a;
-$main-yellow: #f3b200;
+/* $main-yellow: #eff300; */
+$main-yellow: #feef3d;
+/* $main-yellow-transparent: #eff300be; */
+$main-yellow-transparent: #feef3dbe;
 $main-background-color: rgb(33, 37, 41);
 $text-black-background: rgba(0, 0, 0, 0.61);
 $main-font-family: "Roboto";
 $main-radius: 0.4rem;
 $dark-background-primary: /* rgb(100, 100, 100) */ rgb(76, 76, 76);
-$dark-background-secondary: rgb(66, 66, 66);
+$dark-background-primary-translucid: rgba(76, 76, 76, 0.9);
+/* $dark-background-secondary: rgb(66, 66, 66); */
+$dark-background-secondary: #242021;
+$dark-background-secondary-translucid: rgba(66, 66, 66, 0.712);
 $dark-box-shadow-primary: 1px 1px 2px #e7e7e7;
 $dark-color-primary: #e7e7e7;
 $dark-color-secondary: #585858;
@@ -19,24 +26,82 @@ $dark-button-color-primary: #e7e7e7;
 $dark-border-color-primary: #e7e7e7;
 $dark-border-color-secondary: #585858;
 $light-background-primary: white;
+$light-background-primary-translucid: rgba(255, 255, 255, 0.9);
 $light-background-secondary: rgb(192, 192, 192);
+$light-background-secondary-translucid: rgb(192, 192, 192);
+$light-background-terciary: rgba(221, 221, 221, 0.671);
 $light-box-shadow-primary: 1px 1px 2px #d3d2d2fd;
 $light-color-primary: #313131;
 $light-color-secondary: white;
 $light-button-color-primary: rgb(0, 123, 255);
-$light-border-color-primary: #d3d2d2fd;
+$light-border-color-primary: #e6e1e1fd;
 $light-border-color-secondary: #585858;
-$whatsapp-green: #0c9e17;
-$whatsapp-green-hover: #0a7213;
+$whatsapp-green: #0c9e17 /* transparent */;
+$whatsapp-green-hover: #0a7213 /* rgba(0, 0, 0, 0.61) */;
 $main-button-background-color: rgb(10, 10, 10);
 $main-button-background-color-hover: rgb(0, 0, 0);
-$main-button-color: #f3b200;
+$main-button-color: $main-yellow;
+$main-box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.13);
+$main-box-shadow-lite: 0px 0px 2px 1px rgba(0, 0, 0, 0.23);
+$second-yellow: #f3ba00;
+$box-shadow-secondary: 0px 0px 2px 1px rgba(0, 0, 0, 0.49) !important;
+
+@mixin underline-on-hover {
+  &:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    background-color: $main-yellow;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    /* transform-origin: bottom right; */
+    transform-origin: bottom left;
+    transition: transform 0.15s ease-out;
+  }
+  &:hover:after {
+    transform: scaleX(1);
+  }
+  display: inline-block;
+  position: relative;
+}
+
+@mixin underline-on-hover-color($c) {
+  &:after {
+    background-color: $c;
+  }
+}
+
+.underline-on-hover {
+  @include underline-on-hover;
+}
+
+@mixin box-shadow {
+  border: none !important;
+  /* 
+  box-shadow: $main-box-shadow; */
+  box-shadow: $box-shadow-secondary;
+}
+
+@mixin box-shadow-two {
+  border: none !important;
+  box-shadow: $box-shadow-secondary;
+}
+
+@mixin box-shadow-lite {
+  border: none !important;
+  box-shadow: $main-box-shadow-lite;
+}
 
 @mixin lmmmc-button {
+  @include box-shadow;
+  @include underline-on-hover();
+  cursor: pointer;
   background-color: $main-button-background-color;
   border-color: $main-button-background-color;
   color: $main-button-color;
-  transition: transform 0.5s;
+  transition: transform 0.3s;
   &:hover {
     transform: scale(1.02);
     background-color: $main-button-background-color-hover;

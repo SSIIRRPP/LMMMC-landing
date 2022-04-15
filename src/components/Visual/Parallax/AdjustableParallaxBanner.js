@@ -1,6 +1,7 @@
-import { useContext, useEffect, useMemo } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { ParallaxBanner, useParallaxController } from "react-scroll-parallax";
-import { LayoutContext } from "../../Layout";
+import LayoutContext from "../../../contexts/LayoutContext";
+import FadeInComp from "../FadeInComp";
 
 const a = () => {
   if (false) {
@@ -10,33 +11,51 @@ const a = () => {
 
 export const AdjustableContainer = ({
   children,
+  width: wd,
   containerClass,
   containerStyle = {},
   includeWidthContainer,
   updateParallaxControllerOnResultUpdate = false,
+  heightModifier,
   widthSwitch,
+  fadeIn = false,
 }) => {
+  const containerRef = useRef(null);
   const {
-    sizes: { width },
+    sizes: { width: _wd },
+    fontSizeTransform,
   } = useContext(LayoutContext);
-  /* const [result, setResult] = useState({}); */
   const parallaxController = useParallaxController();
+  const [height, setHeight] = useState(800);
 
-  const result = useMemo(
+  const width = useMemo(() => (wd ? wd : _wd), [wd, _wd]);
+
+  const result = useMemo(() => {
+    const a = includeWidthContainer
+      ? { ...widthSwitch(width), width } || { height: 800, width }
+      : widthSwitch(width) || { height: 800 };
+    return { ...a, height: a.height * fontSizeTransform };
+  }, [width, widthSwitch, includeWidthContainer, fontSizeTransform]);
+
+  const render = useMemo(
     () =>
-      includeWidthContainer
-        ? { ...widthSwitch(width), width } || { height: 800, width }
-        : widthSwitch(width) || { height: 800 },
-    [width, widthSwitch, includeWidthContainer]
+      typeof children === "function"
+        ? children({ result, ref: containerRef })
+        : children,
+    [children, result]
   );
 
-  /* useEffect(() => {    
-    const res = (() =>
-      includeWidthContainer
-        ? { ...widthSwitch(width), width } || { height: 800, width }
-        : widthSwitch(width) || { height: 800 })();
-    setResult(res);
-  }, [width, widthSwitch, includeWidthContainer]); */
+  useEffect(() => {
+    if (result?.height) {
+      if (typeof heightModifier === "function") {
+        setHeight(heightModifier(result?.height));
+      } else {
+        setHeight(result?.height);
+      }
+    } else {
+      setHeight(800);
+    }
+  }, [heightModifier, result?.height]);
 
   useEffect(() => {
     if (updateParallaxControllerOnResultUpdate) {
@@ -45,39 +64,57 @@ export const AdjustableContainer = ({
     }
   }, [result, updateParallaxControllerOnResultUpdate, parallaxController]);
 
-  const { height } = result;
-  return (
-    <div
-      className={containerClass ? containerClass : ""}
-      style={
-        result?.constainerStyle
-          ? {
-              ...containerStyle,
-              ...result.constainerStyle,
-              minHeight: height ? height : 800,
-              width: includeWidthContainer ? width : undefined,
+  const ret = useMemo(
+    () => (
+      <>
+        {width ? (
+          <div
+            ref={containerRef}
+            className={containerClass ? containerClass : ""}
+            style={
+              result?.constainerStyle
+                ? {
+                    ...containerStyle,
+                    ...result?.constainerStyle,
+                    minHeight: height,
+                    width: includeWidthContainer ? width : undefined,
+                  }
+                : {
+                    ...containerStyle,
+                    minHeight: height,
+                    width: includeWidthContainer ? width : undefined,
+                  }
             }
-          : {
-              ...containerStyle,
-              minHeight: height ? height : 800,
-              width: includeWidthContainer ? width : undefined,
-            }
-      }
-    >
-      {typeof children === "function" ? children({ result }) : children}
-    </div>
+          >
+            {fadeIn ? <FadeInComp>{render}</FadeInComp> : <>{render}</>}
+          </div>
+        ) : null}
+      </>
+    ),
+    [
+      containerClass,
+      containerStyle,
+      includeWidthContainer,
+      fadeIn,
+      render,
+      result,
+      height,
+      width,
+    ]
   );
+
+  return ret;
 };
 
 const AdjustableParallaxBanner = (props) => {
   const { children, className, style = {}, layers = [] } = props;
   return (
     <AdjustableContainer {...props}>
-      {({ result }) => (
+      {({ result, ref }) => (
         <>
           <ParallaxBanner
             className={className ? className : ""}
-            layers={typeof layers === "function" ? layers(result) : layers}
+            layers={typeof layers === "function" ? layers(result, ref) : layers}
             style={
               result?.style
                 ? {

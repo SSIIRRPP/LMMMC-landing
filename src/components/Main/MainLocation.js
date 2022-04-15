@@ -1,13 +1,10 @@
 import ADJParallaxBanner from "../Visual/Parallax/AdjustableParallaxBanner";
 import BackgroundImage from "../../assets/images/tarifasBarcos.jpg";
-import { useCallback, useContext } from "react";
+import { useCallback } from "react";
 import { Parallax } from "react-scroll-parallax";
-import {
-  MouseParallaxChild,
-  MouseParallaxContainer,
-} from "react-parallax-mouse";
-import { LayoutContext } from "../Layout";
 import FadeInComp from "../Visual/FadeInComp";
+import MouseParallax from "../Visual/Parallax/MouseParallax";
+import "./styles/MainLocation.scss";
 
 const defHeight = 800;
 
@@ -16,81 +13,85 @@ const fadeOpts = {
   threshold: [0.4, 0.6],
 };
 
-const Body = ({ width, height }) => {
-  const { touch } = useContext(LayoutContext);
-  /* console.log("props: ", props); */
+const url =
+  "https://www.google.com/maps/embed?hl=en-GB&pb=!1m14!1m8!1m3!1d3154.9010137487735!2d-0.7419713!3d37.7454664!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4185fc37fbe271%3A0xb0436966114d08be!2sLa%20Manga%20Mar%20Menor%20Ch%C3%A1rter!5e0!3m2!1ses!2ses!4v1648243888659!5m2!1ses!2ses";
+
+const Body = (props) => {
+  const { width, height } = props;
+
   return (
     <FadeInComp options={fadeOpts}>
-      <MouseParallaxContainer
-        enabled={!touch}
-        useWindowMouseEvents
-        containerStyles={{
-          height,
-          width,
+      <MouseParallax
+        {...props}
+        updateStyles={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
+        factor={{ x: -0.005, y: -0.005 }}
       >
-        <MouseParallaxChild
-          factorX={-0.005}
-          factorY={-0.005}
-          updateStyles={(o) => {
-            return {
-              height,
-              width,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            };
+        <Parallax
+          speed={15}
+          style={{
+            backgroundColor: "white",
+            borderRadius: ".4rem",
+            height: height * 0.8,
+            width: width ? width * 0.9 : 0,
+            maxWidth: "900px",
+            overflow: "hidden",
           }}
         >
-          <Parallax
-            speed={15}
-            /* scale={[0.7, 1, [0.66, 0.13, 0, 0.99]]} */
-            style={{
-              backgroundColor: "white",
-              borderRadius: ".4rem",
-              height: height * 0.8,
-              width: width ? width * 0.9 : 0,
-              maxWidth: "900px",
-            }}
-          />
-        </MouseParallaxChild>
-      </MouseParallaxContainer>
+          <div className="mapouter">
+            <div className="gmap_canvas">
+              {width && height ? (
+                <>
+                  <iframe
+                    src={url}
+                    width={`${width * 0.9 > 900 ? 900 : width * 0.9}`}
+                    height={`${height * 0.8}`}
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    title="map"
+                    loading="lazy"
+                    id="gmap_canvas"
+                    frameBorder="0"
+                    scrolling="no"
+                    marginHeight="0"
+                    marginWidth="0"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                </>
+              ) : null}
+            </div>
+          </div>
+        </Parallax>
+      </MouseParallax>
     </FadeInComp>
   );
 };
 
-const Background = ({ height, width }) => {
-  const { touch } = useContext(LayoutContext);
+const Background = (props) => {
+  const { width, height } = props;
   return (
-    <MouseParallaxContainer
-      enabled={!touch}
-      useWindowMouseEvents
-      containerStyles={{
-        height,
-        width,
+    <MouseParallax
+      {...props}
+      updateStyles={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
+      factor={{ x: 0.005, y: 0.005 }}
     >
-      <MouseParallaxChild
-        factorX={0.005}
-        factorY={0.005}
-        updateStyles={(o) => {
-          return {
-            height,
-            width,
-          };
+      <div
+        style={{
+          height,
+          width,
+          backgroundImage: `url(${BackgroundImage})`,
+          backgroundPosition: "center center",
+          backgroundSize: "cover",
         }}
-      >
-        <div
-          style={{
-            height,
-            width,
-            backgroundImage: `url(${BackgroundImage})`,
-            backgroundPosition: "center center",
-            backgroundSize: "cover",
-          }}
-        />
-      </MouseParallaxChild>
-    </MouseParallaxContainer>
+      />
+    </MouseParallax>
   );
 };
 
@@ -103,11 +104,6 @@ const MainLocation = () => {
         scale: [1.35, 1.1],
         shouldAlwaysCompleteAnimation: true,
         children: <Background {...props} />,
-        style: {
-          /* display: "flex",
-          justifyContent: "center",
-          alignItems: "center", */
-        },
       },
       {
         style: {
@@ -146,7 +142,26 @@ const MainLocation = () => {
     }
   }, []);
 
-  return <ADJParallaxBanner layers={layers} widthSwitch={widthSwitch} />;
+  return (
+    <ADJParallaxBanner layers={layers} a={true} widthSwitch={widthSwitch} />
+  );
 };
 
 export default MainLocation;
+
+/* const a = (
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3154.9010137487735!2d-0.7419713!3d37.7454664!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4185fc37fbe271%3A0xb0436966114d08be!2sLa%20Manga%20Mar%20Menor%20Ch%C3%A1rter!5e0!3m2!1ses!2ses!4v1648243888659!5m2!1ses!2ses"
+    width="600"
+    height="450"
+    style="border:0;"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+  ></iframe>
+);
+
+const b = {
+  a: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3154.9010137487735!2d-0.7419713!3d37.7454664!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4185fc37fbe271%3A0xb0436966114d08be!2sLa%20Manga%20Mar%20Menor%20Ch%C3%A1rter!5e0!3m2!1ses!2ses!4v1648243888659!5m2!1ses!2ses",
+  b: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2730.6821563850376!2d-0.7419713202059731!3d37.745466361159345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4185fc37fbe271%3A0xb0436966114d08be!2sLa%20Manga%20Mar%20Menor%20Ch%C3%A1rter!5e0!3m2!1sen!2ses!4v1648243071959!5m2!1sen!2ses",
+}; */

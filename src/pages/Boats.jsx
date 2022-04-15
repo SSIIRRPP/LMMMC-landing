@@ -4,11 +4,6 @@ import BackgroundImage from "../assets/images/barcoCenital.jpg";
 import "./styles/Boats.scss";
 import ADJParallaxBanner from "../components/Visual/Parallax/AdjustableParallaxBanner";
 import { useCallback, useContext } from "react";
-import { LayoutContext } from "../components/Layout";
-import {
-  MouseParallaxChild,
-  MouseParallaxContainer,
-} from "react-parallax-mouse";
 import ThemeContext from "../contexts/ThemeContext";
 import { generateWaUrl } from "../constants";
 import { Parallax } from "react-scroll-parallax";
@@ -16,6 +11,7 @@ import LazyLoader from "../util/LazyLoader";
 import FadeInComp from "../components/Visual/FadeInComp";
 import FadeIn from "react-fade-in";
 import LanguageContext from "../contexts/LanguageContext";
+import MouseParallax from "../components/Visual/Parallax/MouseParallax";
 
 const fadeOpts = {
   ratio: 0.2,
@@ -46,8 +42,8 @@ const Body = () => {
   );
 };
 
-const Header = ({ width, height }) => {
-  const { touch } = useContext(LayoutContext);
+const Header = (props) => {
+  const { height, width } = props;
   const {
     text: {
       Boats: {
@@ -57,72 +53,36 @@ const Header = ({ width, height }) => {
   } = useContext(LanguageContext);
   return (
     <FadeInComp options={fadeOpts}>
-      <MouseParallaxContainer
-        enabled={!touch}
-        useWindowMouseEvents
-        containerStyles={{
-          height,
-          width,
-        }}
-      >
-        <MouseParallaxChild
-          factorX={-0.002}
-          factorY={-0.005}
-          updateStyles={(o) => {
-            return {
-              height,
-              width,
-            };
-          }}
-        >
-          <Parallax speed={-5} startScroll={200}>
-            <div className="Boats__header" style={{ width, height }}>
-              <div className="Boats__header--container">
-                <h1>{h1}</h1>
-                <div className="Boats__header--text">
-                  <h5>{h5}</h5>
-                </div>
+      <MouseParallax {...props} factor={{ x: -0.002, y: -0.005 }}>
+        <Parallax speed={-5} startScroll={200}>
+          <div className="Boats__header" style={{ width, height }}>
+            <div className="Boats__header--container">
+              <h1>{h1}</h1>
+              <div className="Boats__header--text">
+                <h5>{h5}</h5>
               </div>
             </div>
-          </Parallax>
-        </MouseParallaxChild>
-      </MouseParallaxContainer>
+          </div>
+        </Parallax>
+      </MouseParallax>
     </FadeInComp>
   );
 };
 
-const Background = ({ height, width }) => {
-  const { touch } = useContext(LayoutContext);
+const Background = (props) => {
+  const { height, width } = props;
   return (
-    <MouseParallaxContainer
-      enabled={!touch}
-      useWindowMouseEvents
-      containerStyles={{
-        height,
-        width,
-      }}
-    >
-      <MouseParallaxChild
-        factorX={0.002}
-        factorY={0.005}
-        updateStyles={(o) => {
-          return {
-            height,
-            width,
-          };
+    <MouseParallax {...props}>
+      <div
+        style={{
+          height,
+          width,
+          backgroundImage: `url(${BackgroundImage})`,
+          backgroundPosition: "center center",
+          backgroundSize: "cover",
         }}
-      >
-        <div
-          style={{
-            height,
-            width,
-            backgroundImage: `url(${BackgroundImage})`,
-            backgroundPosition: "center center",
-            backgroundSize: "cover",
-          }}
-        />
-      </MouseParallaxChild>
-    </MouseParallaxContainer>
+      />
+    </MouseParallax>
   );
 };
 

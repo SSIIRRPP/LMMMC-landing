@@ -1,0 +1,116 @@
+@import "../../../styles/variables.scss";
+
+.CourseBody {
+  margin: 2rem 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: 1fr;
+  &__section {
+    padding: 0.5rem;
+  }
+  &__description {
+    width: 100%;
+    min-width: 600px;
+    padding-right: 1rem;
+  }
+  &__info {
+    width: 100%;
+    overflow: hidden;
+  }
+  &__list {
+    padding: 1rem;
+    &Item {
+      margin: 0.35rem 0.35rem 0 0;
+      padding: 0.75rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      border-radius: $main-radius;
+      @include box-shadow;
+      &--icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 0.2rem;
+        & svg {
+          width: 40px;
+          height: 40px;
+        }
+      }
+      &--info {
+        padding: 0.2rem;
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+      &--name {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 0.2rem;
+        & h5 {
+          margin-bottom: 0;
+          text-align: center;
+        }
+      }
+      &--description {
+        & p {
+          margin: 0;
+          text-align: center;
+        }
+      }
+    }
+    &--Requisitos {
+      margin-top: 1rem;
+    }
+    &--title {
+      margin-bottom: 2rem;
+      border-bottom: 1px solid;
+      & h4 {
+        text-align: center;
+      }
+    }
+    &--body {
+      @include box-shadow;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: 1fr;
+      border: 1px solid;
+      border-radius: $main-radius;
+      padding-bottom: 0.35rem;
+      padding-left: 0.35rem;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .CourseBody {
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr auto;
+    &__section {
+      margin: 0 auto;
+      margin-top: 2rem;
+    }
+    &__description {
+      min-width: unset;
+      padding-right: 0.5rem;
+    }
+    &__info {
+      margin: 1rem 0;
+    }
+    &__list {
+      &--Requisitos {
+        margin-top: 3rem;
+      }
+      padding: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .CourseBody {
+    &__list {
+      &--body {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+}

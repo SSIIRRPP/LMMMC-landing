@@ -4,6 +4,7 @@ import Layout from "./components/Layout";
 import Language from "./contexts/Language";
 import Theme from "./contexts/Theme";
 import "./index.scss";
+import "./styles/theme.scss";
 
 function App() {
   return (

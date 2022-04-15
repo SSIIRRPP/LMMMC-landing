@@ -3,19 +3,17 @@
   require(`../../assets/images/boats/${boat.id}/${img}.jpeg`)
 ); */
 import { useCallback, useContext, useMemo, useState } from "react";
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-import { Parallax } from "react-scroll-parallax";
-import ThemeContext from "../../contexts/ThemeContext";
 import ADJParallaxBanner from "../Visual/Parallax/AdjustableParallaxBanner";
-import { ReactComponent as PeopleIcon } from "../../assets/icons/people.svg";
 import { ReactComponent as WhatsAppIcon } from "../../assets/icons/whatsapp.svg";
-import { ReactComponent as ClearIcon } from "../../assets/icons/clear.svg";
 import "./styles/ListBoat.scss";
 import { Button } from "react-bootstrap";
-import { Modal } from "@mui/material";
 import { useNavigate } from "react-router";
 import FadeInComp from "../Visual/FadeInComp";
 import LanguageContext from "../../contexts/LanguageContext";
+import ParalaxBackgroundLines from "../Visual/Parallax/ParallaxBackgroundLines";
+import ImageModal from "./ImageModal";
+import { boatLink } from "../../util/links";
+import CapacityIcon from "../Visual/CapacityIcon";
 /* var asyncRequire = require("async-require"); */
 
 const fadeOpts = {
@@ -23,70 +21,13 @@ const fadeOpts = {
   threshold: [0.5],
 };
 
-const ImageModal = ({ openModal, setOpenModal, image, boat }) => {
-  return (
-    <Modal
-      open={openModal}
-      keepMounted
-      onBackdropClick={() => setOpenModal(false)}
-      onClose={() => setOpenModal(false)}
-    >
-      <div
-        onClick={() => setOpenModal(false)}
-        style={{
-          position: "relative",
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <TransformWrapper>
-          {() => (
-            <div
-              style={
-                {
-                  /* padding: "5vh 5vw", */
-                }
-              }
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div
-                onClick={() => setOpenModal(false)}
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  right: 0,
-                }}
-              >
-                <ClearIcon width={40} height={40} />
-              </div>
-              <TransformComponent>
-                <img
-                  src={image}
-                  alt={boat.id}
-                  style={{ maxWidth: "90vw", maxHeight: "90vh" }}
-                />
-              </TransformComponent>
-            </div>
-          )}
-        </TransformWrapper>
-      </div>
-    </Modal>
-  );
-};
-
 const Body = ({ boat, inverted, linkText, width }) => {
   const [openModal, setOpenModal] = useState(false);
   const {
     text: {
-      Boats: {
-        ListBoat: {
-          Body: { shipmaster, requires_license, no_license, info },
-        },
-      },
+      boatInfo: { shipmaster, requires_license, no_license, info },
     },
+    lang,
   } = useContext(LanguageContext);
   const navigate = useNavigate();
   const mainImage = useMemo(
@@ -114,7 +55,6 @@ const Body = ({ boat, inverted, linkText, width }) => {
                 <h5>{shipmaster}</h5>
               </div>
             ) : null}
-
             <div className="ListBoat__second--item ListBoat__second--license">
               {boat.requiresLicense ? (
                 <>
@@ -127,31 +67,35 @@ const Body = ({ boat, inverted, linkText, width }) => {
               )}
             </div>
             {boat.capacity ? (
-              <div className="ListBoat__second--item ListBoat__second--capacity">
-                <h6>{boat.capacity}</h6>{" "}
-                <span>
-                  <PeopleIcon />
-                </span>
-              </div>
+              <CapacityIcon
+                className="ListBoat__second--item ListBoat__second--capacity"
+                capacity={boat.capacity}
+              />
             ) : null}
             <div className="ListBoat__second--item ListBoat__second--description">
-              <p>{boat.description}</p>
+              <p>{boat.text[lang]}</p>
             </div>
           </div>
           <div className="ListBoat__second--bottom">
             <Button
               variant="success"
+              bsPrefix=" "
               className="ListBoat__second--link ListBoat__second--whatsapp"
               as="a"
               href={linkText}
               target="_blank"
             >
               <div className="ListBoat__second--whatsappContainer">
-                <WhatsAppIcon fill="#fff" width={40} height={40} />
+                <WhatsAppIcon fill="#000" width={40} height={40} />
               </div>
             </Button>
             <Button
-              onClick={() => navigate(`/embarcaciones/${boat.id}`)}
+              as="a"
+              href={boatLink(boat)}
+              onClick={(e) => {
+                e.preventDefault();
+                navigate(boatLink(boat));
+              }}
               className="ListBoat__second--link ListBoat__second--info"
             >
               {info}
@@ -162,16 +106,92 @@ const Body = ({ boat, inverted, linkText, width }) => {
       <ImageModal
         openModal={openModal}
         setOpenModal={setOpenModal}
-        boat={boat}
-        image={mainImage}
+        images={mainImage}
+        alt={boat.id}
       />
     </div>
   );
 };
 
+const Background = ({ height }) => {
+  const sty = useMemo(
+    () => ({
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      alignItems: "center",
+    }),
+    []
+  );
+  const lines = useMemo(() => {
+    const st = {
+      width: "100%",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    };
+    return [
+      {
+        scale: { x: [1.1, 1], y: [1.5, 3] },
+        startScroll: height * 0.7,
+        rotated: true,
+        style: st,
+      },
+      {
+        scale: { x: [1.1, 1], y: [3, 1.5] },
+        startScroll: height * 0.7,
+        style: st,
+      },
+    ];
+  }, [height]);
+
+  return (
+    <>
+      <ParalaxBackgroundLines lines={lines} style={sty} height={height} />
+      {/* <div className="ListBoat__background" style={{ height }}>
+      <Parallax
+        scaleY={[1.5, 3]}
+        scaleX={[1.1, 1]}
+        startScroll={height * 0.7}
+        shouldAlwaysCompleteAnimation={true}
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div
+          className={`ListBoat__background--plx rotated ListBoat__background--plx${
+            theme.name === "dark" ? "-dark" : "-light"
+          }`}
+        />
+      </Parallax>
+      <Parallax
+        scaleY={[3, 1.5]}
+        scaleX={[1.1, 1]}
+        startScroll={height * 0.7}
+        shouldAlwaysCompleteAnimation={true}
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div
+          className={`ListBoat__background--plx ListBoat__background--plx${
+            theme.name === "dark" ? "-dark" : "-light"
+          }`}
+        />
+      </Parallax>
+    </div> */}
+    </>
+  );
+};
+
 const ListBoat = (props) => {
   const { boat } = props;
-  const { theme } = useContext(ThemeContext);
 
   const widthSwitch = useCallback((width) => {
     switch (true) {
@@ -195,7 +215,7 @@ const ListBoat = (props) => {
       return [
         {
           scale: [1.25, 1.1],
-          speed: -2,
+          speed: -4,
           opacity: [0.8, 0.9],
           children: (
             <div
@@ -214,50 +234,11 @@ const ListBoat = (props) => {
           style: { height, zIndex: 3 },
         },
         {
-          children: (
-            <div className="ListBoat__background" style={{ height }}>
-              <Parallax
-                scaleY={[1.5, 3]}
-                scaleX={[1.1, 1]}
-                startScroll={height * 0.7}
-                shouldAlwaysCompleteAnimation={true}
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <div
-                  className={`ListBoat__background--plx rotated ListBoat__background--plx${
-                    theme.name === "dark" ? "-dark" : "-light"
-                  }`}
-                />
-              </Parallax>
-              <Parallax
-                scaleY={[3, 1.5]}
-                scaleX={[1.1, 1]}
-                startScroll={height * 0.7}
-                shouldAlwaysCompleteAnimation={true}
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <div
-                  className={`ListBoat__background--plx ListBoat__background--plx${
-                    theme.name === "dark" ? "-dark" : "-light"
-                  }`}
-                />
-              </Parallax>
-            </div>
-          ),
+          children: <Background {...props} {...layerProps} />,
         },
       ];
     },
-    [theme, backgroundImage, props]
+    [backgroundImage, props]
   );
 
   return (

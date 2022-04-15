@@ -1,0 +1,60 @@
+@import "../../../styles/variables.scss";
+
+.BoatImage {
+  &List {
+    &__wrapper {
+    }
+    &__header {
+      & > h5 {
+        text-align: center;
+      }
+    }
+    &__list {
+      &--container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: visible;
+      }
+      @include box-shadow;
+      display: grid;
+      padding: 0 5px;
+      grid-template-rows: 1fr;
+      border-radius: $main-radius;
+      margin-bottom: 1rem;
+    }
+    &__item {
+      &--container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      &--last {
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        & > span {
+          font-size: 1.5rem;
+          text-align: center;
+          color: white;
+        }
+      }
+      cursor: pointer;
+      background-position: center;
+      background-size: cover;
+      width: 90px;
+      height: 90px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 2px;
+    }
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto;
+    padding-top: 1.5rem;
+  }
+}

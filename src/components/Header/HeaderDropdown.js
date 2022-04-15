@@ -4,6 +4,7 @@ const HeaderDropdown = ({
   title,
   id,
   style,
+  pStyle = {},
   className,
   children,
   open,
@@ -16,7 +17,9 @@ const HeaderDropdown = ({
         className={className ? className : undefined}
         onClick={() => setOpen((s) => (s === id ? null : id))}
       >
-        {title}
+        <p className="underline-on-hover" style={{ margin: 0, ...pStyle }}>
+          {title}
+        </p>
       </div>
       <Expand open={open === id}>{children}</Expand>
     </>

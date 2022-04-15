@@ -1,0 +1,72 @@
+@import "../../styles/variables.scss";
+
+.School {
+  &__container {
+    min-height: calc(100vh - 162px /* header & footer height */);
+    background-position: center;
+    background-size: cover;
+  }
+  &__header {
+    padding: 0 2rem;
+    border-bottom: 1px solid;
+    & > h2 {
+      text-align: center;
+      margin: 1rem 0;
+    }
+  }
+  &__wrapper {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
+  &__list {
+    &--wrapper {
+      margin: 4rem 1rem;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      grid-template-columns: 1fr;
+      border: 1px solid;
+      border-radius: $main-radius;
+    }
+    &--header {
+      margin: 1rem 0 0;
+      border-bottom: 1px solid;
+      & > h3 {
+        text-align: center;
+      }
+    }
+    &--item {
+      &.dark {
+        &:hover {
+          background-color: $dark-background-primary;
+        }
+      }
+      &.light {
+        &:hover {
+          background-color: $light-background-primary;
+        }
+      }
+      background-color: transparent;
+      cursor: pointer;
+      border: none;
+      text-align: center;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .School {
+    &__wrapper {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+      padding-bottom: 2rem;
+    }
+    &__list {
+      &--wrapper {
+        margin: 0;
+        margin-top: 2rem;
+      }
+    }
+  }
+}

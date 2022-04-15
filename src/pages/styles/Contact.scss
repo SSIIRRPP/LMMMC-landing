@@ -1,0 +1,13 @@
+.Contact {
+  &__background {
+    background-position: 20% center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  &__body {
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+}

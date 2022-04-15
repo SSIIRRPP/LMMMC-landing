@@ -7,8 +7,10 @@ const FadeInComp = ({
   className,
   childRef,
   style = {},
-  options,
+  options = { ratio: 0.2, threshold: [0.2, 0.4, 0.6, 0.8] },
+  onShow,
   active,
+  id,
 }) => {
   const _childRef = useRef(null);
   const [_visible, _setVisible] = useState(false);
@@ -22,13 +24,17 @@ const FadeInComp = ({
     if (_isVisible) {
       _setVisible(true);
       _setActive(false);
+      typeof onShow === "function" && onShow();
     }
-  }, [_isVisible]);
+  }, [_isVisible, onShow]);
   return (
     <div
       ref={childRef ? childRef : _childRef}
-      className={`FadeInComp${className ? ` ${className}` : ""}`}
-      style={{ ...style, opacity: _visible ? "1" : "0" }}
+      className={`FadeInComp ${_visible ? "show" : "hide"}${
+        className ? ` ${className}` : ""
+      }`}
+      style={style}
+      id={id ? id : undefined}
     >
       {children}
     </div>

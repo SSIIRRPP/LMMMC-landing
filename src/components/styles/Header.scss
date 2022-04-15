@@ -2,14 +2,14 @@
 
 .Header {
   &.dark {
-    background-color: $dark-background-primary !important;
+    background-color: $dark-background-secondary !important;
   }
   &.light {
     background-color: $light-grey !important;
   }
   padding: 0.5rem;
   opacity: 0.99;
-  min-height: 80px;
+  min-height: 72px;
   &__brand {
     font-weight: 500;
     font-size: 1.5rem;
@@ -21,6 +21,10 @@
   }
   &__lang {
     &--container {
+      @include underline-on-hover;
+      & ::before {
+        border-bottom: 1px solid $main-yellow !important;
+      }
     }
     &--select {
     }
@@ -39,15 +43,17 @@
       border-radius: $main-radius;
     }
     &--divider {
+      display: block;
       height: 1px;
       width: 100%;
     }
   }
   &__link {
+    display: block !important;
     margin: 0 auto;
     text-align: center;
     cursor: pointer !important;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    transition: color 0.15s ease-in-out background-color 0.15s ease-in-out,
       border-color 0.15s ease-in-out;
     &--icon {
       display: flex;
@@ -56,13 +62,18 @@
     }
   }
   &__dropdown {
+    max-width: calc(100vw - 40px);
     & a {
       display: flex !important;
       justify-content: center !important;
       align-items: center !important;
     }
     &--link {
+      padding: 0.25rem 1rem;
       transition: background-color 0.3s, color 0.3s;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
     }
   }
   &__collapse {
@@ -71,12 +82,34 @@
       justify-content: space-between;
       align-items: center;
     }
+    &--button {
+      height: 40px;
+      border-color: $main-yellow !important ;
+      & > svg {
+        fill: $main-yellow !important ;
+        transform: scale(1.1);
+      }
+    }
+  }
+  &__switches {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    & svg {
+      fill: $main-yellow;
+    }
+    & > div:first-child {
+      margin-right: 1rem;
+    }
   }
 }
 
 .dark {
   & .Header {
     &__lang {
+      &--container {
+        @include underline-on-hover-color($main-yellow);
+      }
       &--image {
         border-color: $dark-color-secondary;
       }
@@ -116,9 +149,12 @@
   }
 }
 
-.light {
+/* .light {
   & .Header {
     &__lang {
+      &--container {
+        @include underline-on-hover-color($second-yellow);
+      }
       &--image {
         border-color: $light-color-secondary;
       }
@@ -145,7 +181,6 @@
           color: $light-grey !important;
           background-color: $main-grey !important;
         }
-        color: $main-grey !important;
       }
       & .dropdown-divider {
         border-color: $main-grey;
@@ -163,4 +198,4 @@
       color: $light-color-primary !important;
     }
   }
-}
+} */

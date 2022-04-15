@@ -26,7 +26,7 @@ const SchoolSlide = () => {
       </div>
       <Button
         className="CarouselSlide__button"
-        onClick={() => navigate("escuela/", { state: { from: "/#services" } })}
+        onClick={() => navigate("/cursos", { state: { from: "/#services" } })}
       >
         {button}
       </Button>

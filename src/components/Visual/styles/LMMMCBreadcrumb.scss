@@ -1,0 +1,46 @@
+@import "../../../styles/variables.scss";
+
+.LMMMCBreadcrumb {
+  @include box-shadow-two;
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  margin: 1rem;
+  background-color: $text-black-background;
+  border-radius: $main-radius;
+  /* box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.13); */
+  & a {
+    @include underline-on-hover;
+    /* &:hover {
+      color: $main-yellow;
+      text-decoration: underline;
+    } */
+    color: $dark-color-primary;
+  }
+  & span {
+    &:hover {
+      text-decoration: none;
+      /* cursor: unset; */
+    }
+    color: $dark-color-primary;
+  }
+  & a,
+  span {
+    font-size: 0.85rem;
+  }
+}
+
+.light {
+  & .LMMMCBreadcrumb {
+    & a {
+      @include underline-on-hover-color($second-yellow);
+    }
+  }
+}
+
+.dark {
+  & .LMMMCBreadcrumb {
+    & a {
+      @include underline-on-hover-color($main-yellow);
+    }
+  }
+}

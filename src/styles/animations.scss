@@ -1,0 +1,65 @@
+@import "./variables.scss";
+
+.anim-pulse {
+  transition: none;
+  animation-name: pulse-anim;
+  animation-duration: 0.5s;
+  animation-delay: 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: backwards;
+}
+
+.anim-backwards {
+  animation-fill-mode: backwards;
+}
+
+@keyframes pulse-anim {
+  0% {
+    transform: scale(1);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.selected-course {
+  &.dark {
+    animation-name: background-pulse-anim-dark;
+  }
+  &.light {
+    animation-name: background-pulse-anim-light;
+  }
+  animation-duration: 3s;
+  animation-iteration-count: 5;
+  animation-fill-mode: backwards;
+}
+
+@keyframes background-pulse-anim-dark {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: $dark-background-secondary;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes background-pulse-anim-light {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: $light-background-secondary;
+  }
+  100% {
+    background-color: transparent;
+  }
+}

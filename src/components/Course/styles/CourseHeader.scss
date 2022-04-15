@@ -1,0 +1,19 @@
+@import "../../../styles/variables.scss";
+
+.CourseHeader {
+  &__Body {
+    &--title {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      & h1 {
+        text-align: center;
+        margin-top: 4rem;
+        padding: 0.75rem 1rem;
+        border-radius: $main-radius;
+        background-color: $text-black-background;
+        color: white;
+      }
+    }
+  }
+}

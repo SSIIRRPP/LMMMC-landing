@@ -1,0 +1,41 @@
+@import "../../styles/variables.scss";
+
+.CoursesPrices {
+  padding: 1rem;
+  &__header {
+    border-bottom: 1px solid;
+    margin: 1rem 0 2rem;
+    & > h1 {
+      text-align: center;
+      margin: 1rem 0 0.8rem;
+    }
+  }
+  &__body {
+    @include box-shadow-two;
+    border: 1px solid;
+    border-bottom: none;
+    border-radius: $main-radius;
+  }
+  &__table {
+    &--header {
+      font-size: 1.05rem !important;
+      white-space: nowrap;
+    }
+  }
+  &__item {
+    &--title {
+      &Cell {
+        & > h3 {
+          text-align: center;
+          margin: 0.5rem 0;
+        }
+      }
+    }
+    &--cell {
+      & a {
+        font-weight: 500;
+      }
+      font-weight: 500 !important;
+    }
+  }
+}

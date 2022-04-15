@@ -1,20 +1,22 @@
 import { useCallback, useContext } from "react";
 import { Parallax } from "react-scroll-parallax";
 import FirstBackground from "../../assets/images/first.jpg";
+/* import FirstBackground from "../../assets/images/1.png"; */
+/* import FirstBackground from "../../assets/images/2.jpeg"; */
 import Sailboat from "../../assets/images/velero.png";
 import Boat from "../../assets/images/yate.png";
-import Jetski from "../../assets/images/motoagua.png";
+import { ReactComponent as Rose } from "../../assets/images/rosa.svg";
 import "./styles/MainFirst.scss";
-import { LayoutContext } from "../Layout";
 import ADJParallaxBanner from "../Visual/Parallax/AdjustableParallaxBanner";
 import ThemeContext from "../../contexts/ThemeContext";
 import LanguageContext from "../../contexts/LanguageContext";
+import LayoutContext from "../../contexts/LayoutContext";
 
-const Body = () => {
+const Body = ({ height }) => {
   const {
     text: {
       Main: {
-        First: { header, title, sail, boat, jetski },
+        First: { header, title, sail, boat, school },
       },
     },
   } = useContext(LanguageContext);
@@ -22,7 +24,7 @@ const Body = () => {
     sizes: { width },
   } = useContext(LayoutContext);
   return (
-    <div className="MainFirstBody">
+    <div className="MainFirstBody" style={{ height }}>
       <div className="MainFirstBody__container">
         <div className="MainFirstBody__header">
           <div className="MainFirstBody__header--left">
@@ -39,30 +41,22 @@ const Body = () => {
         </div>
         <div className="MainFirstBody__separator" />
         <div className="MainFirstBody__body">
-          <div className="MainFirstBody__item">
-            <div className="MainFirstBody__item--icon">
-              <img src={Sailboat} alt="sailboat" />
-            </div>
-            <div className="MainFirstBody__item--name">
-              <h3>{sail}</h3>
-            </div>
+          <div className="MainFirstBody__item--icon">
+            <img src={Sailboat} alt="sailboat" />
           </div>
-          <div className="MainFirstBody__item">
-            <div className="MainFirstBody__item--icon">
-              <img src={Boat} alt="boat" />
-            </div>
-            <div className="MainFirstBody__item--name">
-              <h3>{boat}</h3>
-            </div>
+          <div className="MainFirstBody__item--name">
+            <h3>{sail}</h3>
           </div>
-          <div className="MainFirstBody__item">
-            <div className="MainFirstBody__item--icon">
-              <img src={Jetski} alt="jet-ski" />
-            </div>
-            <div className="MainFirstBody__item--name">
-              <h3>{jetski}</h3>
-            </div>
+          <div className="MainFirstBody__item--icon">
+            <img src={Boat} alt="boat" />
           </div>
+          <div className="MainFirstBody__item--name">
+            <h3>{boat}</h3>
+          </div>
+          <div className="MainFirstBody__item--icon rose">
+            <Rose fill="#fff" height={100} />
+          </div>
+          <div className="MainFirstBody__item--name rose">{school}</div>
         </div>
       </div>
     </div>
@@ -81,7 +75,7 @@ const MainFirst = () => {
       }
       case width < 750:
       default: {
-        return { height: 750, width };
+        return { height: 850, width };
       }
     }
   }, []);
@@ -93,6 +87,9 @@ const MainFirst = () => {
         translateY: [-10, 10],
         scale: [1.15, 1, "easeOutCubic"],
         shouldAlwaysCompleteAnimation: true,
+        /* style: {
+          backgroundPosition: "85% center",
+        }, */
       },
       {
         children: (
@@ -107,7 +104,7 @@ const MainFirst = () => {
                 height,
               }}
             >
-              <Body />
+              <Body height={height} />
             </Parallax>
           </div>
         ),
