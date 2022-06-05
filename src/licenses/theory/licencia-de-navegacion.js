@@ -37,7 +37,7 @@ const licenciaDeNavegacion = {
   backgroundPosition: "50% 50%",
   bckImageFormat: "webp",
   description: [],
-  price: 120,
+  price: 100,
   images: [],
   theory: null,
 };

@@ -148,20 +148,3 @@ const MainLocation = () => {
 };
 
 export default MainLocation;
-
-/* const a = (
-  <iframe
-    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3154.9010137487735!2d-0.7419713!3d37.7454664!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4185fc37fbe271%3A0xb0436966114d08be!2sLa%20Manga%20Mar%20Menor%20Ch%C3%A1rter!5e0!3m2!1ses!2ses!4v1648243888659!5m2!1ses!2ses"
-    width="600"
-    height="450"
-    style="border:0;"
-    allowfullscreen=""
-    loading="lazy"
-    referrerpolicy="no-referrer-when-downgrade"
-  ></iframe>
-);
-
-const b = {
-  a: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3154.9010137487735!2d-0.7419713!3d37.7454664!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4185fc37fbe271%3A0xb0436966114d08be!2sLa%20Manga%20Mar%20Menor%20Ch%C3%A1rter!5e0!3m2!1ses!2ses!4v1648243888659!5m2!1ses!2ses",
-  b: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2730.6821563850376!2d-0.7419713202059731!3d37.745466361159345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4185fc37fbe271%3A0xb0436966114d08be!2sLa%20Manga%20Mar%20Menor%20Ch%C3%A1rter!5e0!3m2!1sen!2ses!4v1648243071959!5m2!1sen!2ses",
-}; */

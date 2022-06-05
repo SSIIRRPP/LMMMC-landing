@@ -1,15 +1,15 @@
 import { useContext } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router";
-import LanguageContext from "../../../contexts/LanguageContext";
+import LanguageContext from "../../contexts/LanguageContext";
 
-const RentingSlide = () => {
+const CarouselSlide = ({ languageKey, path }) => {
   const {
     text: {
       Main: {
         Carousel: {
           slides: {
-            Renting: { h2, p, button },
+            [languageKey]: { h2, p, button },
           },
         },
       },
@@ -26,9 +26,7 @@ const RentingSlide = () => {
       </div>
       <Button
         className="CarouselSlide__button"
-        onClick={() =>
-          navigate("embarcaciones/", { state: { from: "/#services" } })
-        }
+        onClick={() => navigate(path, { state: { from: "/#services" } })}
       >
         {button}
       </Button>
@@ -36,4 +34,4 @@ const RentingSlide = () => {
   );
 };
 
-export default RentingSlide;
+export default CarouselSlide;

@@ -20,11 +20,11 @@ import "./styles/Layout.scss";
 import "../styles/animations.scss";
 import "../components/Visual/styles/index.scss";
 import { LayoutProvider } from "../contexts/LayoutContext";
+import Main from "../pages/Main";
 
 // lazy loaded pages
 const Boats = lazy(() => import("../pages/Boats"));
 const Boat = lazy(() => import("../pages/Boat"));
-const Main = lazy(() => import("../pages/Main"));
 const Course = lazy(() => import("../pages/Course"));
 const CoursesPrices = lazy(() => import("../pages/CoursesPrices"));
 const NotFound = lazy(() => import("../pages/NotFound"));
@@ -108,7 +108,7 @@ const Layout = () => {
         return () => clearTimeout(tm);
       }
     },
-    [location, navigate, parallaxController]
+    [location.pathname, navigate, parallaxController]
   );
 
   useEffect(() => {

@@ -190,7 +190,6 @@ const ContactForm = () => {
         console.log("correct: ", newErrors);
         setSending(true);
         window.grecaptcha.enterprise.execute(recaptchaKey).then((r) => {
-          console.log(r);
           window.grecaptcha.enterprise.reset(recaptchaKey);
           // then, fetch
           fetch(`${baseApiUrl}public/contact/email`, {

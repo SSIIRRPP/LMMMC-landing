@@ -17,6 +17,14 @@ const BoatImages = ({ boat }) => {
     [boat]
   );
 
+  const backgroundImage = useMemo(
+    () =>
+      boat
+        ? require(`../../assets/images/boats/${boat.id}/background.jpeg`)
+        : null,
+    [boat]
+  );
+
   const imagesArray = useMemo(() => {
     if (boat) {
       const imags = boat.images
@@ -25,14 +33,18 @@ const BoatImages = ({ boat }) => {
         )
         .map((src, i) => ({ src, alt: `${boat.id}-${i + 1}` }));
       if (mainImage) {
-        return [{ src: mainImage, alt: boat.id }, ...imags];
+        return [
+          { src: mainImage, alt: boat.id },
+          { src: backgroundImage, añt: boat.id },
+          ...imags,
+        ];
       } else {
         return imags;
       }
     } else {
       return null;
     }
-  }, [mainImage, boat]);
+  }, [mainImage, backgroundImage, boat]);
 
   const widthSwitch = useCallback((width) => {
     switch (true) {
@@ -56,7 +68,6 @@ const BoatImages = ({ boat }) => {
               setActive={setActiveImage}
               setOpenModal={setOpenModal}
             />
-            {/* <Button onClick={() => setOpenModal(true)}>Ver Imagenes</Button> */}
             <ImageModal
               openModal={openModal}
               setOpenModal={setOpenModal}

@@ -1,8 +1,6 @@
 import { useCallback, useContext } from "react";
 import { Parallax } from "react-scroll-parallax";
 import FirstBackground from "../../assets/images/first.jpg";
-/* import FirstBackground from "../../assets/images/1.png"; */
-/* import FirstBackground from "../../assets/images/2.jpeg"; */
 import Sailboat from "../../assets/images/velero.png";
 import Boat from "../../assets/images/yate.png";
 import { ReactComponent as Rose } from "../../assets/images/rosa.svg";
@@ -11,8 +9,10 @@ import ADJParallaxBanner from "../Visual/Parallax/AdjustableParallaxBanner";
 import ThemeContext from "../../contexts/ThemeContext";
 import LanguageContext from "../../contexts/LanguageContext";
 import LayoutContext from "../../contexts/LayoutContext";
+import { useNavigate } from "react-router";
 
 const Body = ({ height }) => {
+  const navigate = useNavigate();
   const {
     text: {
       Main: {
@@ -41,22 +41,46 @@ const Body = ({ height }) => {
         </div>
         <div className="MainFirstBody__separator" />
         <div className="MainFirstBody__body">
-          <div className="MainFirstBody__item--icon">
+          <div
+            className="MainFirstBody__item--icon"
+            onClick={() => navigate("/embarcaciones/veleros/bavaria-39")}
+          >
             <img src={Sailboat} alt="sailboat" />
           </div>
-          <div className="MainFirstBody__item--name">
+          <div
+            className="MainFirstBody__item--name"
+            onClick={() => navigate("/embarcaciones/veleros/bavaria-39")}
+          >
             <h3>{sail}</h3>
           </div>
-          <div className="MainFirstBody__item--icon">
+          <div
+            className="MainFirstBody__item--icon"
+            onClick={() =>
+              navigate("/embarcaciones/lanchas-con-licencia/mareti-600")
+            }
+          >
             <img src={Boat} alt="boat" />
           </div>
-          <div className="MainFirstBody__item--name">
+          <div
+            className="MainFirstBody__item--name"
+            onClick={() =>
+              navigate("/embarcaciones/lanchas-con-licencia/mareti-600")
+            }
+          >
             <h3>{boat}</h3>
           </div>
-          <div className="MainFirstBody__item--icon rose">
+          <div
+            className="MainFirstBody__item--icon rose"
+            onClick={() => navigate("/cursos/tarifas")}
+          >
             <Rose fill="#fff" height={100} />
           </div>
-          <div className="MainFirstBody__item--name rose">{school}</div>
+          <div
+            className="MainFirstBody__item--name rose"
+            onClick={() => navigate("/cursos/tarifas")}
+          >
+            {school}
+          </div>
         </div>
       </div>
     </div>

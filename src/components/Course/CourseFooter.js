@@ -12,7 +12,7 @@ const CourseFooter = ({ course }) => {
 
   return (
     <Container>
-      <MouseParallax /* height={400}  */ factor={{ x: 0.01, y: 0.02 }}>
+      <MouseParallax factor={{ x: 0.01, y: 0.02 }}>
         <div className="CourseFooter">
           <div className="CourseFooter__card">
             <div className="CourseFooter__top">

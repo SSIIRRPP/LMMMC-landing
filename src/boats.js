@@ -256,7 +256,7 @@ const saver585 = {
 
 const mareti600 = {
   type: "lanchas-con-licencia",
-  backgroundPosition: "45% 65%",
+  backgroundPosition: "45% 45%",
   price: {
     seasons: [
       {
@@ -272,7 +272,7 @@ const mareti600 = {
     deposit: 600,
     fuel: { full: 80, half: 40 },
   },
-  images: ["1", "2", "3", "4"],
+  images: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
   requiresLicense: true,
   capacity: 8,
   requiresShipmaster: false,
@@ -312,6 +312,90 @@ const mareti600 = {
     {
       spa: "GPS, SONDA y PLOTTER pantalla 7”",
       en: "GPS, SONDA y PLOTTER 7” screen",
+    },
+  ],
+};
+
+const mareti585 = {
+  type: "lanchas-con-licencia",
+  backgroundPosition: "45% 65%",
+  price: {
+    seasons: [
+      {
+        ...peakSeason,
+        prices: { "2h": 180, "4h": 250, "6h": 350, "8h": 400 },
+      },
+      {
+        ...lowSeason,
+        prices: { "2h": 170, "4h": 230, "6h": 290, "8h": 350 },
+      },
+    ],
+    shipmaster: shipmasterPrices,
+    deposit: 600,
+    fuel: { full: 80, half: 40 },
+  },
+  images: [],
+  requiresLicense: true,
+  capacity: 8,
+  requiresShipmaster: false,
+  year: 2022,
+  horsePower: 80,
+  engine: "Honda 80cv",
+  consumption: "15L/h",
+  id: "mareti-585",
+  name: "Mareti 585",
+  size: {
+    length: 6,
+    breadth: 2.5,
+  },
+  includes: { spa: "Seguro y limpieza.", en: "Cleaning and insurance" },
+  text: {
+    spa: (
+      <>
+        Embarcación Mareti 585, de 6 metros open, con amplia mesa, frigorífico,
+        cocina y lavabo. <br /> Ideal para pasar el día navegando.
+      </>
+    ),
+    en: (
+      <>
+        Mareti 585, 6 meters open, with large table, refrigerator, kitchen and
+        sink. <br /> Ideal to spend the day sailing.
+      </>
+    ),
+  },
+  equipment: [
+    { spa: "Equipo de música bluetooth", en: "Bluetooth stereo system" },
+    {
+      spa: "Solarium amplio en proa y popa",
+      en: "Spacious solarium on bow and stern",
+    },
+    { spa: "Ducha de agua dulce", en: "Freshwater shower" },
+    {
+      spa: "Toldo Bimini INOX",
+      en: "INOX Bimini awning",
+    },
+
+    { spa: "Escala de baño en popa", en: "Stern bathing ladder" },
+    {
+      spa: "Mesa desmontable para proa o popa",
+      en: "Detachable table for bow or stern",
+    },
+    { spa: "VHF portátil", en: "Portable VHF" },
+    {
+      spa: "GPS, SONDA y PLOTTER pantalla 7”",
+      en: "GPS, SONDA y PLOTTER 7” screen",
+    },
+    {
+      spa: "Frigorífico",
+      en: "Refrigerator",
+    },
+    {
+      spa: "Cocina",
+      en: "Cooker",
+    },
+    {
+      spa: "Lavabo",
+      en: "Washbasin",
     },
   ],
 };
@@ -433,6 +517,7 @@ const boats = [
   aquadrac35,
   saver585,
   mareti600,
+  mareti585,
   mareti500,
   karnic440,
 ];

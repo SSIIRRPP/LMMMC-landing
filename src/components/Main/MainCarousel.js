@@ -15,21 +15,40 @@ import { ReactComponent as ForwardIcon } from "../../assets/icons/arrow_forward.
 import { ReactComponent as BackIcon } from "../../assets/icons/arrow_back.svg";
 import useVisibility from "../../hooks/useVisibility";
 import { AdjustableContainer } from "../Visual/Parallax/AdjustableParallaxBanner";
-import RentingSlide from "./Slides/RentingSlide";
-import ContactSlide from "./Slides/ContactSlide";
-import SchoolSlide from "./Slides/SchoolSlide";
 import ThemeContext from "../../contexts/ThemeContext";
 import "./styles/MainCarousel.scss";
-import "./Slides/styles/CarouselSlide.scss";
+import "./styles/CarouselSlide.scss";
 import LanguageContext from "../../contexts/LanguageContext";
 import LayoutContext from "../../contexts/LayoutContext";
 import FadeInComp from "../Visual/FadeInComp";
+import CarouselSlide from "./CarouselSlide";
 
 const speed = 20;
 const scaleEase = [0.48, 0.98, 0, 1];
 const scale = [0.8, 1, scaleEase];
 const opacityEase = [0.29, 0.18, 0, 1.48];
 const opacity = [0.25, 1, opacityEase];
+
+const captions = [
+  {
+    Background: FirstBackground,
+    languageKey: "Renting",
+    path: "embarcaciones/",
+    key: "renting-carousel-caption",
+  },
+  {
+    Background: SecondBackground,
+    languageKey: "School",
+    path: "/cursos",
+    key: "school-carousel-caption",
+  },
+  {
+    Background: ThirdBackground,
+    languageKey: "Contact",
+    path: "contacto/",
+    key: "contact-carousel-caption",
+  },
+];
 
 const MainCarousel = () => {
   const {
@@ -49,7 +68,6 @@ const MainCarousel = () => {
   const [interval, setInterval] = useState(null);
   const [show, setShow] = useState(false);
   const toggle = useCallback((v) => setInterval(v), []);
-  /* const onChange = useCallback((e) => {}, []); */
   const { isVisible } = useVisibility({
     childRef,
   });
@@ -110,6 +128,40 @@ const MainCarousel = () => {
     }
   }, [show, parallaxController]);
 
+  const generateCaption = useCallback(
+    ({ Background, languageKey, path, key, show, height }) => (
+      <Carousel.Item
+        key={key}
+        className="MainCarousel__carousel--item"
+        style={{
+          height,
+          backgroundImage: `url(${Background})`,
+        }}
+      >
+        <Carousel.Caption className="MainCarousel__carousel--caption">
+          <Parallax
+            id={key}
+            speed={speed}
+            scale={scale}
+            opacity={opacity}
+            className="MainCarousel__carousel--captionWrapper"
+          >
+            <div
+              className={`MainCarousel__carousel--captionContainer MainCarousel__carousel--captionContainer${
+                show ? "Show" : "Hide"
+              }`}
+            >
+              <FadeInComp>
+                <CarouselSlide languageKey={languageKey} path={path} />
+              </FadeInComp>
+            </div>
+          </Parallax>
+        </Carousel.Caption>
+      </Carousel.Item>
+    ),
+    []
+  );
+
   const carousel = useMemo(
     () => (
       <AdjustableContainer widthSwitch={widthSwitch} includeWidthContainer>
@@ -162,90 +214,7 @@ const MainCarousel = () => {
               }
               prevLabel="Anterior"
             >
-              <Carousel.Item
-                className="MainCarousel__carousel--item"
-                style={{
-                  height,
-                  backgroundImage: `url(${FirstBackground})`,
-                }}
-              >
-                <Carousel.Caption className="MainCarousel__carousel--caption">
-                  <Parallax
-                    id="blabla0"
-                    /* ref={key === 0 ? captionRef : null} */
-                    speed={speed}
-                    scale={scale}
-                    opacity={opacity}
-                    className="MainCarousel__carousel--captionWrapper"
-                  >
-                    <div
-                      className={`MainCarousel__carousel--captionContainer MainCarousel__carousel--captionContainer${
-                        show ? "Show" : "Hide"
-                      }`}
-                    >
-                      <FadeInComp>
-                        <RentingSlide />
-                      </FadeInComp>
-                    </div>
-                  </Parallax>
-                </Carousel.Caption>
-              </Carousel.Item>
-              <Carousel.Item
-                className="MainCarousel__carousel--item"
-                style={{
-                  height,
-                  backgroundImage: `url(${SecondBackground})`,
-                }}
-              >
-                <Carousel.Caption className="MainCarousel__carousel--caption">
-                  <Parallax
-                    id="blabla1"
-                    speed={speed}
-                    scale={scale}
-                    opacity={opacity}
-                    /* ref={key === 1 || key === 0 ? captionRef : null} */
-                    className="MainCarousel__carousel--captionWrapper"
-                  >
-                    <div
-                      className={`MainCarousel__carousel--captionContainer MainCarousel__carousel--captionContainer${
-                        show ? "Show" : "Hide"
-                      }`}
-                    >
-                      <FadeInComp>
-                        <SchoolSlide />
-                      </FadeInComp>
-                    </div>
-                  </Parallax>
-                </Carousel.Caption>
-              </Carousel.Item>
-              <Carousel.Item
-                className="MainCarousel__carousel--item"
-                style={{
-                  height,
-                  backgroundImage: `url(${ThirdBackground})`,
-                }}
-              >
-                <Carousel.Caption className="MainCarousel__carousel--caption">
-                  <Parallax
-                    id="blabla2"
-                    speed={speed}
-                    scale={scale}
-                    opacity={opacity}
-                    /* ref={key === 2 ? captionRef : null} */
-                    className="MainCarousel__carousel--captionWrapper"
-                  >
-                    <div
-                      className={`MainCarousel__carousel--captionContainer MainCarousel__carousel--captionContainer${
-                        show ? "Show" : "Hide"
-                      }`}
-                    >
-                      <FadeInComp>
-                        <ContactSlide />
-                      </FadeInComp>
-                    </div>
-                  </Parallax>
-                </Carousel.Caption>
-              </Carousel.Item>
+              {captions.map((c) => generateCaption({ ...c, show, height }))}
             </Carousel>
             {collapsed ? (
               <div className="MainCarousel__collapsed--container">
@@ -275,7 +244,7 @@ const MainCarousel = () => {
         )}
       </AdjustableContainer>
     ),
-    [show, interval, key, widthSwitch]
+    [show, interval, key, widthSwitch, generateCaption]
   );
 
   return (

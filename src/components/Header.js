@@ -244,6 +244,18 @@ const Header = ({ open, setOpen }) => {
                       <p className="m0 underline-on-hover">Mareti 600</p>
                     </NavDropdown.Item>
                   </Link>
+                  <span className="Header__expand--divider" />
+                  <Link
+                    to="/embarcaciones/lanchas-con-licencia/mareti-585"
+                    disableUnderline
+                  >
+                    <NavDropdown.Item
+                      className="Header__dropdown--link"
+                      as="div"
+                    >
+                      <p className="m0 underline-on-hover">Mareti 585</p>
+                    </NavDropdown.Item>
+                  </Link>
                 </div>
               </HeaderDropdown>
               <NavDropdown.Divider />
