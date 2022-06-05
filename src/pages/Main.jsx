@@ -7,6 +7,7 @@ import { useRef } from "react";
 
 const Main = () => {
   const mainRef = useRef(null);
+
   return (
     <div ref={mainRef}>
       <FadeIn delay={200} transitionDuration={800}>

@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
+import useQueryParams from "../hooks/useQueryParams";
 import spa from "../languages/spa";
 import { LanguageProvider } from "./LanguageContext";
 
 const Language = ({ children }) => {
   const [lang, _setLang] = useState("spa");
   const [text, setText] = useState(spa);
+  const queryParams = useQueryParams();
 
   const setLang = useCallback((l) => {
     _setLang(l);
@@ -46,11 +48,21 @@ const Language = ({ children }) => {
   );
 
   useEffect(() => {
+    const qL = queryParams.get("lang");
     const l = localStorage.getItem("lang");
-    if (l) {
+    if (qL && lang !== qL) {
+      changeLanguage(qL);
+    } else if (l && lang !== l) {
       changeLanguage(l);
     }
-  }, [changeLanguage]);
+  }, [changeLanguage, queryParams]);
+
+  useEffect(() => {
+    const titleElm = document.getElementsByTagName("title")[0];
+    if (titleElm) {
+      titleElm.innerHTML = text.Head.Title;
+    }
+  }, [text]);
 
   window.chngLng = changeLanguage;
 

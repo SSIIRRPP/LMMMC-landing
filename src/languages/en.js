@@ -1,6 +1,9 @@
 import SpaFlag from "../assets/icons/spa.png";
 
 const en = {
+  Head: {
+    Title: "Boat rentals in La Manga del Mar Menor, Murcia, Spain",
+  },
   Header: {
     home: "Home",
     dropdown: {
