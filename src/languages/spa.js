@@ -1,4 +1,5 @@
 const spa = {
+  name: "spa",
   Head: {
     Title: "Alquiler de barcos en La Manga del Mar Menor, Murcia",
   },
