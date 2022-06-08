@@ -96,7 +96,7 @@ const CoursesPrices = () => {
   } = useContext(LanguageContext);
   const { theme } = useContext(ThemeContext);
   return (
-    <Container className="CoursesPrices">
+    <Container as="main" className="CoursesPrices">
       <div
         className="CoursesPrices__header"
         style={{ borderColor: theme.borderColorPrimary }}

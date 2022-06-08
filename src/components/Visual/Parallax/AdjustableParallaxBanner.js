@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { ParallaxBanner, useParallaxController } from "react-scroll-parallax";
 import LayoutContext from "../../../contexts/LayoutContext";
 import FadeInComp from "../FadeInComp";
@@ -14,6 +14,7 @@ export const AdjustableContainer = ({
   width: wd,
   containerClass,
   containerStyle = {},
+  containerTag,
   includeWidthContainer,
   updateParallaxControllerOnResultUpdate = false,
   heightModifier,
@@ -28,6 +29,10 @@ export const AdjustableContainer = ({
   const parallaxController = useParallaxController();
   const [height, setHeight] = useState(800);
 
+  /* const Element = useMemo(
+    () => {const a = React.createElement(containerTag ? containerTag : "div", {}, null)},
+    [containerTag]
+  ); */
   const width = useMemo(() => (wd ? wd : _wd), [wd, _wd]);
 
   const result = useMemo(() => {
@@ -65,33 +70,37 @@ export const AdjustableContainer = ({
   }, [result, updateParallaxControllerOnResultUpdate, parallaxController]);
 
   const ret = useMemo(
-    () => (
-      <>
-        {width ? (
-          <div
-            ref={containerRef}
-            className={containerClass ? containerClass : ""}
-            style={
-              result?.constainerStyle
-                ? {
-                    ...containerStyle,
-                    ...result?.constainerStyle,
-                    minHeight: height,
-                    width: includeWidthContainer ? width : undefined,
-                  }
-                : {
-                    ...containerStyle,
-                    minHeight: height,
-                    width: includeWidthContainer ? width : undefined,
-                  }
-            }
-          >
-            {fadeIn ? <FadeInComp>{render}</FadeInComp> : <>{render}</>}
-          </div>
-        ) : null}
-      </>
-    ),
+    () =>
+      React.createElement(
+        containerTag ? `${containerTag}` : "div",
+        {
+          ref: containerRef,
+          className: containerClass ? containerClass : undefined,
+          style: result?.constainerStyle
+            ? {
+                ...containerStyle,
+                ...result?.constainerStyle,
+                minHeight: height,
+                width: includeWidthContainer ? width : undefined,
+              }
+            : {
+                ...containerStyle,
+                minHeight: height,
+                width: includeWidthContainer ? width : undefined,
+              },
+        },
+        <>
+          {width ? (
+            fadeIn ? (
+              <FadeInComp>{render}</FadeInComp>
+            ) : (
+              <>{render}</>
+            )
+          ) : null}
+        </>
+      ),
     [
+      containerTag,
       containerClass,
       containerStyle,
       includeWidthContainer,

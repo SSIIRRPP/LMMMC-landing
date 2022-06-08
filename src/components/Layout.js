@@ -177,7 +177,7 @@ const Layout = () => {
         Fallback,
       }}
     >
-      <div className="Layout" id="layout">
+      <layout is="custom" id="layout">
         <Header open={openHeader} setOpen={setOpenHeader} />
         <div className="Layout__main" ref={layoutRef}>
           <Suspense fallback={<Fallback />}>
@@ -211,7 +211,7 @@ const Layout = () => {
             <Footer footerRef={footerRef} />
           </Suspense>
         </div>
-      </div>
+      </layout>
     </LayoutProvider>
   );
 };

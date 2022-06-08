@@ -31,7 +31,7 @@ const Boat = () => {
   return boat ? (
     <>
       {show ? (
-        <FadeIn delay={300} transitionDuration={500}>
+        <FadeIn wrapperTag="main" delay={300} transitionDuration={500}>
           <BoatHeader boat={boat} />
           <BoatImages boat={boat} />
           <BoatBody boat={boat} />

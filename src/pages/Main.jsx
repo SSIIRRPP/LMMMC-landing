@@ -9,7 +9,7 @@ const Main = () => {
   const mainRef = useRef(null);
 
   return (
-    <div ref={mainRef}>
+    <main ref={mainRef}>
       <FadeIn delay={200} transitionDuration={800}>
         <section
           id="presentation"
@@ -24,7 +24,7 @@ const Main = () => {
           <MainLocation />
         </section>
       </FadeIn>
-    </div>
+    </main>
   );
 };
 

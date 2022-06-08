@@ -100,7 +100,13 @@ const Contact = () => {
     }
   }, []);
 
-  return <ADJParallaxBanner layers={layers} widthSwitch={widthSwitch} />;
+  return (
+    <ADJParallaxBanner
+      containerTag="main"
+      layers={layers}
+      widthSwitch={widthSwitch}
+    />
+  );
 };
 
 export default Contact;

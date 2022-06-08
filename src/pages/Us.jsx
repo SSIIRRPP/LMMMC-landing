@@ -153,18 +153,16 @@ const Us = () => {
   }, []);
 
   return (
-    <div>
-      <FadeIn delay={400}>
-        {sections.map((section, i) => (
-          <UsSection
-            key={`us_${section.id}_section`}
-            {...section}
-            inverted={(i + 1) % 2 === 0}
-            widthSwitch={widthSwitch}
-          />
-        ))}
-      </FadeIn>
-    </div>
+    <FadeIn wrapperTag="main" childTag="section" delay={400}>
+      {sections.map((section, i) => (
+        <UsSection
+          key={`us_${section.id}_section`}
+          {...section}
+          inverted={(i + 1) % 2 === 0}
+          widthSwitch={widthSwitch}
+        />
+      ))}
+    </FadeIn>
   );
 };
 

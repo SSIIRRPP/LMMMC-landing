@@ -15,7 +15,7 @@ const NotFound = ({ minHeight }) => {
   const { theme } = useContext(ThemeContext);
   const navigate = useNavigate();
   return (
-    <Container>
+    <Container as="main">
       <MouseParallax factor={{ x: 0.01, y: 0.01 }} height={minHeight}>
         <div className="NotFound" style={{ minHeight }}>
           <aside>
@@ -24,11 +24,11 @@ const NotFound = ({ minHeight }) => {
               alt="404"
             />
           </aside>
-          <main>
+          <section>
             <h1 style={{ color: theme.color }}>{title}</h1>
             <p style={{ color: theme.color }}>{text}</p>
             <Button onClick={() => navigate("/")}>{button}</Button>
-          </main>
+          </section>
         </div>
       </MouseParallax>
     </Container>

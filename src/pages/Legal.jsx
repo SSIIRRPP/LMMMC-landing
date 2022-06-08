@@ -6,7 +6,7 @@ import ThemeContext from "../contexts/ThemeContext";
 const Legal = () => {
   const { theme } = useContext(ThemeContext);
   return (
-    <div
+    <main
       className="Legal__container"
       style={{
         backgroundColor: theme.backgroundSecondary,
@@ -362,7 +362,7 @@ const Legal = () => {
           </span>
         </p>
       </Container>
-    </div>
+    </main>
   );
 };
 

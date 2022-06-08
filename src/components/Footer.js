@@ -6,8 +6,8 @@ import "./styles/Footer.scss";
 const Footer = ({ footerRef }) => {
   const year = useMemo(() => new Date(Date.now()).getFullYear(), []);
   return (
-    <div ref={footerRef}>
-      <footer className="Footer">
+    <footer ref={footerRef}>
+      <div className="Footer">
         <Container>
           <span className="Footer__text">
             Copyright © {year} La Manga Mar Menor CHARTER |
@@ -17,8 +17,8 @@ const Footer = ({ footerRef }) => {
             AVISO LEGAL
           </Link>
         </Container>
-      </footer>
-    </div>
+      </div>
+    </footer>
   );
 };
 

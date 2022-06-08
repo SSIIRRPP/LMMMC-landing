@@ -110,7 +110,7 @@ const Boats = () => {
   };
 
   return (
-    <div className={`Boats ${theme.name}`}>
+    <main className={`Boats ${theme.name}`}>
       <LazyLoader>
         <ADJParallaxBanner
           layers={layers}
@@ -119,7 +119,7 @@ const Boats = () => {
         />
         <Body />
       </LazyLoader>
-    </div>
+    </main>
   );
 };
 

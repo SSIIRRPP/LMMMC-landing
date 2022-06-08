@@ -70,7 +70,7 @@ const School = () => {
     [theme, lang]
   );
   return (
-    <FadeIn>
+    <FadeIn wrapperTag="main">
       <Container>
         <div className="School__container">
           <div

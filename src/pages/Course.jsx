@@ -34,7 +34,7 @@ const Course = () => {
   return course ? (
     <>
       {show ? (
-        <FadeIn delay={300} transitionDuration={500}>
+        <FadeIn wrapperTag="main" delay={300} transitionDuration={500}>
           <CourseHeader course={course} />
           <CourseBody course={course} />
           <CourseFooter course={course} />
