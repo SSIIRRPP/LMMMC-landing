@@ -10,7 +10,6 @@ import {
 import { useResizeDetector } from "react-resize-detector";
 import { Routes, Route } from "react-router-dom";
 import { useParallaxController } from "react-scroll-parallax";
-/* import Main from "../pages/Main"; */
 import Header from "./Header";
 import { useLocation, useNavigate } from "react-router";
 import { Spinner } from "react-bootstrap";

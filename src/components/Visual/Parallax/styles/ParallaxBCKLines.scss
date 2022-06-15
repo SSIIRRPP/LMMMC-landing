@@ -15,14 +15,14 @@ $dark-color-t: $dark-background-primary /* -translucid */;
         &::before {
           background: linear-gradient(to top, $light-color, $light-color);
           clip-path: polygon(0 80%, 100% 0, 100% 100%, 0% 100%);
-          --webkit-clip-path: polygon(0 80%, 100% 0, 100% 100%, 0% 100%);
+          -webkit-clip-path: polygon(0 80%, 100% 0, 100% 100%, 0% 100%);
         }
       }
       &.toright {
         &::before {
           background: linear-gradient(to bottom, $light-color, $light-color);
           clip-path: polygon(0 0, 100% 80%, 100% 100%, 0% 100%);
-          --webkit-clip-path: polygon(0 0, 100% 80%, 100% 100%, 0% 100%);
+          -webkit-clip-path: polygon(0 0, 100% 80%, 100% 100%, 0% 100%);
         }
       }
       &::before {
@@ -40,14 +40,14 @@ $dark-color-t: $dark-background-primary /* -translucid */;
         &::before {
           background: linear-gradient(to top, $dark-color, $dark-color-t);
           clip-path: polygon(0 80%, 100% 0, 100% 100%, 0% 100%);
-          --webkit-clip-path: polygon(0 80%, 100% 0, 100% 100%, 0% 100%);
+          -webkit-clip-path: polygon(0 80%, 100% 0, 100% 100%, 0% 100%);
         }
       }
       &.toright {
         &::before {
           background: linear-gradient(to bottom, $dark-color, $dark-color-t);
           clip-path: polygon(0 0, 100% 80%, 100% 100%, 0% 100%);
-          --webkit-clip-path: polygon(0 0, 100% 80%, 100% 100%, 0% 100%);
+          -webkit-clip-path: polygon(0 0, 100% 80%, 100% 100%, 0% 100%);
         }
       }
       &::before {
@@ -64,13 +64,13 @@ $dark-color-t: $dark-background-primary /* -translucid */;
       &.toleft {
         &::before {
           clip-path: polygon(0 0, 0 100%, 100% 0);
-          --webkit-clip-path: polygon(0 0, 0 100%, 100% 0);
+          -webkit-clip-path: polygon(0 0, 0 100%, 100% 0);
         }
       }
       &.toright {
         &::before {
           clip-path: polygon(100% 0, 0 0, 100% 100%);
-          --webkit-clip-path: polygon(100% 0, 0 0, 100% 100%);
+          -webkit-clip-path: polygon(100% 0, 0 0, 100% 100%);
         }
       }
       &::before {

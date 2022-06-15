@@ -36,7 +36,6 @@ const Background = (props) => {
     <>
       {banner ? (
         <ParallaxBanner
-          /* onProgress={(e) => console.log(e)} */
           layers={[{ image: img, ...parallaxProps, opacity: [0.3, 1] }]}
           style={{
             aspectRatio: "1 / 1",

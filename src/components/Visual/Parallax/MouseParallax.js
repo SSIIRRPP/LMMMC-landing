@@ -5,18 +5,18 @@ import {
 } from "react-parallax-mouse";
 import LayoutContext from "../../../contexts/LayoutContext";
 
-const genStyle = (h, w) => {
+const generateStyle = (h, w) => {
   let style = {};
-  const f = (it, t) => {
-    if (it) {
+  const addToStyle = (value, key) => {
+    if (value) {
       style = {
         ...style,
-        [t]: it,
+        [key]: value,
       };
     }
   };
-  f(h, "height");
-  f(w, "width");
+  addToStyle(h, "height");
+  addToStyle(w, "width");
   if (Object.keys(style).length === 0) {
     console.warn("No height or width provided");
   }
@@ -35,7 +35,7 @@ const MouseParallax = ({
 }) => {
   const { x = 0.002, y = 0.005 } = factor;
   const { touch } = useContext(LayoutContext);
-  const styles = useMemo(() => genStyle(height, width), [height, width]);
+  const styles = useMemo(() => generateStyle(height, width), [height, width]);
   return (
     <MouseParallaxContainer
       enabled={!touch}

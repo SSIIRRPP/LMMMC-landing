@@ -54,11 +54,10 @@ const Language = ({ children }) => {
     const l = localStorage.getItem("lang");
     if (qL && (lang !== qL || (l && l !== lang))) {
       changeLanguage(qL);
-    } else {
-      if (!qL && l && lang !== l) {
-        changeLanguage(l);
-      }
+    } else if (!qL && l && lang !== l) {
+      changeLanguage(l);
     }
+
     if (qL) {
       navigate("/");
     }

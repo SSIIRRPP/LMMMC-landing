@@ -29,17 +29,13 @@ export const AdjustableContainer = ({
   const parallaxController = useParallaxController();
   const [height, setHeight] = useState(800);
 
-  /* const Element = useMemo(
-    () => {const a = React.createElement(containerTag ? containerTag : "div", {}, null)},
-    [containerTag]
-  ); */
   const width = useMemo(() => (wd ? wd : _wd), [wd, _wd]);
 
   const result = useMemo(() => {
-    const a = includeWidthContainer
+    const _result = includeWidthContainer
       ? { ...widthSwitch(width), width } || { height: 800, width }
       : widthSwitch(width) || { height: 800 };
-    return { ...a, height: a.height * fontSizeTransform };
+    return { ..._result, height: _result.height * fontSizeTransform };
   }, [width, widthSwitch, includeWidthContainer, fontSizeTransform]);
 
   const render = useMemo(
@@ -69,7 +65,7 @@ export const AdjustableContainer = ({
     }
   }, [result, updateParallaxControllerOnResultUpdate, parallaxController]);
 
-  const ret = useMemo(
+  const container = useMemo(
     () =>
       React.createElement(
         containerTag ? `${containerTag}` : "div",
@@ -112,7 +108,7 @@ export const AdjustableContainer = ({
     ]
   );
 
-  return ret;
+  return container;
 };
 
 const AdjustableParallaxBanner = (props) => {

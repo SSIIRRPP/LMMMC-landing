@@ -2,12 +2,7 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { ReactComponent as ClearIcon } from "../../assets/icons/clear.svg";
 import { Modal } from "@mui/material";
 import "./styles/ImageModal.scss";
-import {
-  /* useCallback,  */ useEffect,
-  useMemo,
-  /* useRef,  */ useState,
-  useContext,
-} from "react";
+import { useEffect, useMemo, useState, useContext, useCallback } from "react";
 import FadeIn from "react-fade-in";
 import ImageGallery from "../Visual/ImageGallery";
 import LayoutContext from "../../contexts/LayoutContext";
@@ -41,6 +36,7 @@ const Body = ({
   alt,
   compact,
   carousel = false,
+  wrapperStyle,
   active,
 }) => {
   const [show, setShow] = useState(false);
@@ -66,7 +62,7 @@ const Body = ({
   const comp = useMemo(() => {
     return (
       <>
-        <TransformComponent wrapperStyle={{ height: "100%", width: "100%" }}>
+        <TransformComponent wrapperStyle={wrapperStyle}>
           <FadeIn visible={show} transitionDuration={300}>
             <div
               className="ImageModal__image"
@@ -78,130 +74,10 @@ const Body = ({
         </TransformComponent>
       </>
     );
-  }, [alt, show, im]);
+  }, [alt, show, im, wrapperStyle]);
 
   return comp;
 };
-
-// const ImageSelector = ({
-//   active,
-//   setActive,
-//   openModal,
-//   images,
-//   /* prs: { resetTransform }, */
-// }) => {
-//   const wrpRef = useRef();
-//   const cntRef = useRef();
-//   const [translation, _setTranslation] = useState(0);
-//   const { width: wrpWidth } = useResizeDetector({ targetRef: wrpRef });
-//   const { width: cntWidth } = useResizeDetector({ targetRef: cntRef });
-//
-//   const maxTranslation = useMemo(() => {
-//     return cntWidth > wrpWidth ? cntWidth - wrpWidth / 2 : wrpWidth;
-//   }, [cntWidth, wrpWidth]);
-//
-//   const minTranslation = useMemo(() => {
-//     return wrpWidth / 2;
-//   }, [wrpWidth]);
-//
-//   const setTranslation = useCallback(
-//     (t) => {
-//       if (t > maxTranslation) {
-//         /* console.log("t1: ", t, maxTranslation, minTranslation); */
-//         _setTranslation(maxTranslation);
-//       } else if (t < minTranslation) {
-//         /* console.log("t2: ", t, maxTranslation, minTranslation); */
-//         _setTranslation(minTranslation);
-//       } else {
-//         /* console.log("t3: ", t, maxTranslation, minTranslation); */
-//         _setTranslation(t);
-//       }
-//     },
-//     [maxTranslation, minTranslation]
-//   );
-//
-//   useEffect(() => {
-//     if (cntWidth < wrpWidth) {
-//       _setTranslation(cntWidth / 2);
-//     } else {
-//       _setTranslation(minTranslation);
-//     }
-//   }, [wrpWidth, cntWidth, _setTranslation, openModal, minTranslation]);
-//
-//   const changeActive = useCallback(
-//     (activeId) => {
-//       setActive(activeId);
-//       /* resetTransform(); */
-//       if (cntWidth > wrpWidth) {
-//         setTranslation(activeId * 90 + 45);
-//       }
-//     },
-//     [cntWidth, wrpWidth, /*  resetTransform,  */ setTranslation, setActive]
-//   );
-//
-//   const fwdPage = useCallback(() => {
-//     setTranslation(translation + wrpWidth * 0.75);
-//   }, [wrpWidth, translation, setTranslation]);
-//   const bckPage = useCallback(() => {
-//     setTranslation(translation - wrpWidth * 0.75);
-//   }, [wrpWidth, translation, setTranslation]);
-//
-//   return (
-//     <div className="ImageModal__selector">
-//       <Button
-//         bsPrefix=" "
-//         className="ImageModal__selector--button"
-//         disabled={!(cntWidth > wrpWidth) || !(translation > minTranslation)}
-//         onClick={bckPage}
-//       >
-//         <BackIcon
-//           style={{
-//             opacity: `${
-//               !(cntWidth > wrpWidth) || !(translation > minTranslation)
-//                 ? ".3"
-//                 : "1"
-//             }`,
-//           }}
-//         />
-//       </Button>
-//       <div className="ImageModal__selector--wrapper" ref={wrpRef}>
-//         <div
-//           className="ImageModal__selector--container"
-//           ref={cntRef}
-//           style={{ transform: `translateX(${translation * -1}px)` }}
-//         >
-//           {images.map((it, i) => (
-//             <div
-//               onClick={() => changeActive(i)}
-//               key={`image-selector-${i}_${it.alt}`}
-//               className={`ImageModal__selector--item${
-//                 active === i ? " active-img" : ""
-//               }`}
-//             >
-//               <img src={it.src} alt={`${it.alt}-mini`} />
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//       <Button
-//         bsPrefix=" "
-//         onClick={fwdPage}
-//         disabled={!(cntWidth > wrpWidth) || !(translation < maxTranslation)}
-//         className="ImageModal__selector--button"
-//       >
-//         <ForwardIcon
-//           style={{
-//             opacity: `${
-//               !(cntWidth > wrpWidth) || !(translation < maxTranslation)
-//                 ? ".3"
-//                 : "1"
-//             }`,
-//           }}
-//         />
-//       </Button>
-//     </div>
-//   );
-// };
 
 const Stepper = ({ openModal, setOpenModal, images, active, setActive }) => {
   useEffect(() => {
@@ -265,8 +141,14 @@ const Stepper = ({ openModal, setOpenModal, images, active, setActive }) => {
   );
 };
 
+const defStyle = {
+  width: "100%",
+  height: "100%",
+};
+
 const ImageModal = (props) => {
   const { openModal, setOpenModal, images, alt } = props;
+  const [touched, setTouched] = useState(false);
   const {
     sizes: { windowHeight },
   } = useContext(LayoutContext);
@@ -275,6 +157,15 @@ const ImageModal = (props) => {
     e.stopPropagation();
     setOpenModal(false);
   };
+
+  const _handleChange = useCallback(() => {
+    setTouched(true);
+  }, []);
+
+  const handleChange = useMemo(
+    () => (touched ? undefined : _handleChange),
+    [touched, _handleChange]
+  );
 
   return (
     <Modal
@@ -291,16 +182,26 @@ const ImageModal = (props) => {
           <>
             {typeof images === "string" ? (
               <TransformWrapper
-                wrapperStyle={{
-                  width: "100%",
-                  height: "100%",
-                }}
+                onWheelStart={handleChange}
+                onPanningStart={handleChange}
+                onPinchingStart={handleChange}
+                onZoomStart={handleChange}
               >
                 {(prs) => (
                   <Body
                     src={images}
                     alt={alt}
                     setOpenModal={setOpenModal}
+                    wrapperStyle={
+                      touched
+                        ? defStyle
+                        : {
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            ...defStyle,
+                          }
+                    }
                     compact
                   />
                 )}
