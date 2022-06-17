@@ -1,4 +1,9 @@
-export default function capitalize(str, all, ignoreWords = [], splitter = " ") {
+export default function capitalize(
+  str,
+  all = false,
+  ignoreWords = [],
+  splitter = " "
+) {
   const capWrd = (st) => {
     let s = st[0].toUpperCase();
     return `${s}${st.slice(1, st.length)}`;
