@@ -23,7 +23,7 @@ const practicaPER = {
   background: true,
   backgroundPosition: "40% 70%",
   bckImageFormat: "jpg",
-  price: 200,
+  price: 220,
   images: [],
 };
 
