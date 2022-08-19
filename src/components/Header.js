@@ -148,6 +148,13 @@ const Header = ({ open, setOpen }) => {
               {/* LMMMC */}
             </Link>
           </Navbar.Brand>
+          <a
+            href="tel:+34675886560"
+            className="Header__phone"
+            style={{ color: "rgb(253, 240, 1)" }}
+          >
+            +34675886560
+          </a>
         </div>
         <div className="Header__collapse--container">
           {collapsed ? switches : null}

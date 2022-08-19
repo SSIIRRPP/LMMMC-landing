@@ -4,12 +4,14 @@ import FirstBackground from "../../assets/images/first.jpg";
 import Sailboat from "../../assets/images/velero.png";
 import Boat from "../../assets/images/yate.png";
 import { ReactComponent as Rose } from "../../assets/images/rosa.svg";
+import { ReactComponent as CallIcon } from "../../assets/icons/call.svg";
 import "./styles/MainFirst.scss";
 import ADJParallaxBanner from "../Visual/Parallax/AdjustableParallaxBanner";
 import ThemeContext from "../../contexts/ThemeContext";
 import LanguageContext from "../../contexts/LanguageContext";
 import LayoutContext from "../../contexts/LayoutContext";
 import { useNavigate } from "react-router";
+import { Button } from "react-bootstrap";
 
 const Body = ({ height }) => {
   const navigate = useNavigate();
@@ -174,7 +176,22 @@ const MainFirst = () => {
         layers={layers}
         widthSwitch={widthSwitch}
         includeWidthContainer
-      />
+      >
+        <div className="MainFirst__phone--container">
+          <Button
+            href="tel:+34675886560"
+            className="anim-pulse MainFirst__phone"
+            variant="light"
+          >
+            <CallIcon
+              height={48}
+              width={48}
+              className="MainFirst__phone--icon"
+            />{" "}
+            ¡Llamanos ya!
+          </Button>
+        </div>
+      </ADJParallaxBanner>
     </>
   );
 };

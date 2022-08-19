@@ -360,6 +360,9 @@ const Legal = () => {
             contactar con esta página web a través de nuestros canales de
             Contacto.
           </span>
+          <br />
+          <br />
+          <small>v1.1</small>
         </p>
       </Container>
     </main>

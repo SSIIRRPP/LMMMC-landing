@@ -197,11 +197,11 @@ const saver585 = {
     seasons: [
       {
         ...peakSeason,
-        prices: { "2h": 140, "4h": 200, "6h": 260, "8h": 320 },
+        prices: { "2h": 160, "4h": 220, "6h": 280, "8h": 350 },
       },
       {
         ...lowSeason,
-        prices: { "2h": 130, "4h": 190, "6h": 250, "8h": 310 },
+        prices: { "2h": 140, "4h": 200, "6h": 260, "8h": 320 },
       },
     ],
     shipmaster: shipmasterPrices,
@@ -261,7 +261,7 @@ const mareti600 = {
     seasons: [
       {
         ...peakSeason,
-        prices: { "2h": 170, "4h": 230, "6h": 290, "8h": 350 },
+        prices: { "2h": 170, "4h": 240, "6h": 360, "8h": 390 },
       },
       {
         ...lowSeason,
@@ -408,11 +408,11 @@ const mareti500 = {
     seasons: [
       {
         ...peakSeason,
-        prices: { "2h": 120, "4h": 170, "6h": 220, "8h": 270 },
+        prices: { "2h": 140, "4h": 180, "6h": 260, "8h": 300 },
       },
       {
         ...lowSeason,
-        prices: { "2h": 110, "4h": 160, "6h": 210, "8h": 260 },
+        prices: { "2h": 120, "4h": 170, "6h": 220, "8h": 270 },
       },
     ],
     shipmaster: shipmasterPrices,
